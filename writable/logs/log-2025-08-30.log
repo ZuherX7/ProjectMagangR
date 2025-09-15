@@ -1,0 +1,385 @@
+CRITICAL - 2025-08-30 01:36:39 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/dokumen.php"
+[Method: GET, Route: user/dokumen]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/dokumen.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('user/dokumen', [], true)
+ 3 APPPATH\Controllers\User.php(73): view('user/dokumen', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->dokumen()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+CRITICAL - 2025-08-30 01:36:49 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/dokumen.php"
+[Method: GET, Route: user/dokumen/menu/1]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/dokumen.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('user/dokumen', [], true)
+ 3 APPPATH\Controllers\User.php(73): view('user/dokumen', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->dokumen('1')
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-08-30 01:44:35 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\sidodik\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\sidodik\app\Models\LogActivityModel.php(37): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\sidodik\app\Controllers\Auth.php(190): App\Models\LogActivityModel->logActivity('2', 'logout', NULL, '::1', Object(CodeIgniter\HTTP\UserAgent))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Auth->logout()
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#11 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+ERROR - 2025-08-30 01:44:35 --> Gagal log logout: Unknown column 'updated_at' in 'field list'
+ERROR - 2025-08-30 01:50:39 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\sidodik\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\sidodik\app\Models\LogActivityModel.php(37): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\sidodik\app\Controllers\Auth.php(190): App\Models\LogActivityModel->logActivity('1', 'logout', NULL, '::1', Object(CodeIgniter\HTTP\UserAgent))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Auth->logout()
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#11 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+ERROR - 2025-08-30 01:50:39 --> Gagal log logout: Unknown column 'updated_at' in 'field list'
+CRITICAL - 2025-08-30 01:56:03 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/dokumen.php"
+[Method: GET, Route: user/dokumen]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/dokumen.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('user/dokumen', [], true)
+ 3 APPPATH\Controllers\User.php(73): view('user/dokumen', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->dokumen()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+CRITICAL - 2025-08-30 01:56:05 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/dokumen.php"
+[Method: GET, Route: user/dokumen]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/dokumen.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('user/dokumen', [], true)
+ 3 APPPATH\Controllers\User.php(73): view('user/dokumen', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->dokumen()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+CRITICAL - 2025-08-30 02:13:21 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/dokumen.php"
+[Method: GET, Route: user/dokumen/menu/10]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/dokumen.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('user/dokumen', [], true)
+ 3 APPPATH\Controllers\User.php(73): view('user/dokumen', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->dokumen('10')
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+CRITICAL - 2025-08-30 02:28:20 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/dokumen.php"
+[Method: GET, Route: user/dokumen/menu/2]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/dokumen.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('user/dokumen', [], true)
+ 3 APPPATH\Controllers\User.php(73): view('user/dokumen', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->dokumen('2')
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-08-30 02:36:02 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\sidodik\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\sidodik\app\Models\LogActivityModel.php(37): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\sidodik\app\Controllers\Auth.php(190): App\Models\LogActivityModel->logActivity('2', 'logout', NULL, '::1', Object(CodeIgniter\HTTP\UserAgent))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Auth->logout()
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#11 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+ERROR - 2025-08-30 02:36:02 --> Gagal log logout: Unknown column 'updated_at' in 'field list'
+ERROR - 2025-08-30 02:41:50 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\sidodik\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\sidodik\app\Models\LogActivityModel.php(37): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\sidodik\app\Controllers\Auth.php(190): App\Models\LogActivityModel->logActivity('1', 'logout', NULL, '::1', Object(CodeIgniter\HTTP\UserAgent))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Auth->logout()
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#11 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+ERROR - 2025-08-30 02:41:50 --> Gagal log logout: Unknown column 'updated_at' in 'field list'
+CRITICAL - 2025-08-30 02:41:56 --> TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given
+[Method: GET, Route: user/dashboard]
+in APPPATH\Views\user\dashboard.php on line 431.
+ 1 SYSTEMPATH\View\View.php(226): include()
+ 2 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('user/dashboard', [], true)
+ 4 APPPATH\Controllers\User.php(39): view('user/dashboard', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->dashboard()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+CRITICAL - 2025-08-30 02:41:56 --> [Caused by] ErrorException: Undefined variable $users
+in APPPATH\Views\user\dashboard.php on line 431.
+ 1 APPPATH\Views\user\dashboard.php(431): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $users', 'C:\\xampp\\htdocs\\sidodik\\app\\Views\\user\\dashboard.php', 431)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\sidodik\\app\\Views\\user\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('user/dashboard', [], true)
+ 5 APPPATH\Controllers\User.php(39): view('user/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-08-30 02:54:06 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\sidodik\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\sidodik\app\Models\LogActivityModel.php(37): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\sidodik\app\Controllers\Auth.php(190): App\Models\LogActivityModel->logActivity('2', 'logout', NULL, '::1', Object(CodeIgniter\HTTP\UserAgent))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Auth->logout()
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#11 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+ERROR - 2025-08-30 02:54:06 --> Gagal log logout: Unknown column 'updated_at' in 'field list'
+CRITICAL - 2025-08-30 03:51:10 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/dokumen.php"
+[Method: GET, Route: user/dokumen]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/dokumen.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('user/dokumen', [], true)
+ 3 APPPATH\Controllers\User.php(77): view('user/dokumen', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->dokumen()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-08-30 03:51:17 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\sidodik\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\sidodik\app\Models\LogActivityModel.php(37): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\sidodik\app\Controllers\User.php(121): App\Models\LogActivityModel->logActivity('8', 'view', '4', '::1', Object(CodeIgniter\HTTP\UserAgent))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\User->viewDokumen('4')
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#11 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+ERROR - 2025-08-30 03:51:17 --> Failed to log view activity: Unknown column 'updated_at' in 'field list'
+CRITICAL - 2025-08-30 03:51:17 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/view_dokumen.php"
+[Method: GET, Route: user/dokumen/view/4]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/view_dokumen.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('user/view_dokumen', [], true)
+ 3 APPPATH\Controllers\User.php(138): view('user/view_dokumen', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->viewDokumen('4')
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-08-30 03:51:19 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\sidodik\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\sidodik\app\Models\LogActivityModel.php(37): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\sidodik\app\Controllers\User.php(163): App\Models\LogActivityModel->logActivity('8', 'download', '4', '::1', Object(CodeIgniter\HTTP\UserAgent))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\User->downloadDokumen('4')
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#11 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+ERROR - 2025-08-30 03:51:19 --> Failed to log download activity: Unknown column 'updated_at' in 'field list'
+ERROR - 2025-08-30 03:51:20 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\sidodik\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\sidodik\app\Models\LogActivityModel.php(37): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\sidodik\app\Controllers\User.php(163): App\Models\LogActivityModel->logActivity('8', 'download', '4', '::1', Object(CodeIgniter\HTTP\UserAgent))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\User->downloadDokumen('4')
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#11 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+ERROR - 2025-08-30 03:51:20 --> Failed to log download activity: Unknown column 'updated_at' in 'field list'
+ERROR - 2025-08-30 03:51:21 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\sidodik\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\sidodik\app\Models\LogActivityModel.php(37): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\sidodik\app\Controllers\User.php(163): App\Models\LogActivityModel->logActivity('8', 'download', '4', '::1', Object(CodeIgniter\HTTP\UserAgent))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\User->downloadDokumen('4')
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#11 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+ERROR - 2025-08-30 03:51:21 --> Failed to log download activity: Unknown column 'updated_at' in 'field list'
+CRITICAL - 2025-08-30 03:57:31 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "user/search.php"
+[Method: GET, Route: user/search]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('user/search.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('user/search', [], true)
+ 3 APPPATH\Controllers\User.php(102): view('user/search', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->search()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-08-30 06:24:15 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\sidodik\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\sidodik\app\Models\LogActivityModel.php(37): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\sidodik\app\Controllers\Auth.php(190): App\Models\LogActivityModel->logActivity('8', 'logout', NULL, '::1', Object(CodeIgniter\HTTP\UserAgent))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Auth->logout()
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#11 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+ERROR - 2025-08-30 06:24:15 --> Gagal log logout: Unknown column 'updated_at' in 'field list'
+ERROR - 2025-08-30 06:25:58 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\sidodik\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\sidodik\app\Models\LogActivityModel.php(37): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\sidodik\app\Controllers\Auth.php(190): App\Models\LogActivityModel->logActivity('1', 'logout', NULL, '::1', Object(CodeIgniter\HTTP\UserAgent))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Auth->logout()
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#11 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+ERROR - 2025-08-30 06:25:58 --> Gagal log logout: Unknown column 'updated_at' in 'field list'
+ERROR - 2025-08-30 08:00:54 --> mysqli_sql_exception: Unknown column 'updated_at' in 'field list' in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\sidodik\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\sidodik\app\Models\LogActivityModel.php(37): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(308): App\Models\LogActivityModel->logActivity('1', 'upload', 5, '::1', Object(CodeIgniter\HTTP\UserAgent))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->addDokumen()
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#11 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+ERROR - 2025-08-30 08:00:54 --> File upload error: Unknown column 'updated_at' in 'field list'
