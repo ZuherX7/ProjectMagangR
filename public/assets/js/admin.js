@@ -376,3 +376,319 @@ document.addEventListener("DOMContentLoaded", function () {
 
   initTooltips();
 });
+
+// GANTI BAGIAN NOTIFICATION SYSTEM DI admin.js DENGAN KODE INI
+
+// =============== NOTIFICATION SYSTEM (UPDATED) ===============
+// Notification system variables
+let notificationData = [];
+let showingNotifications = true;
+let notificationCheckInterval;
+
+// Initialize notifications when document is ready
+function initNotifications() {
+  // Load notifications immediately
+  loadNotifications();
+
+  // Check for new notifications every 30 seconds
+  notificationCheckInterval = setInterval(loadNotifications, 30000);
+
+  // Create notification elements if they don't exist
+  createNotificationElements();
+}
+
+// REPLACE the createNotificationElements function in admin.js with this fixed version
+
+function createNotificationElements() {
+  // Create floating notifications container (positioned better)
+  if (!document.getElementById("floatingNotifications")) {
+    const floatingContainer = document.createElement("div");
+    floatingContainer.className = "floating-notifications";
+    floatingContainer.id = "floatingNotifications";
+    // Updated positioning - centered vertically on the right side
+    floatingContainer.style.cssText = `
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      z-index: 1000;
+      max-width: 350px;
+    `;
+    document.body.appendChild(floatingContainer);
+  }
+
+  // Create notification summary button (positioned above bottom)
+  if (!document.getElementById("notificationSummary")) {
+    const summaryButton = document.createElement("button");
+    summaryButton.className = "notification-summary";
+    summaryButton.id = "notificationSummary";
+    summaryButton.style.display = "none";
+    summaryButton.onclick = toggleNotifications;
+    summaryButton.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 999;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    `;
+    summaryButton.innerHTML = `
+      <i class="fas fa-bell"></i>
+      <span id="notificationCount">0</span> Pengaduan Aktif
+    `;
+    document.body.appendChild(summaryButton);
+  }
+}
+
+// Load notifications from server
+function loadNotifications() {
+  // Only load if we're on an admin page
+  if (!window.location.pathname.includes("/admin")) {
+    return;
+  }
+
+  fetch("/admin/pengaduan/notifications")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data.success) {
+        notificationData = data.notifications || [];
+        updateNotificationDisplay(data);
+        updateSidebarBadge(data.total_active || 0);
+      }
+    })
+    .catch((error) => {
+      console.error("Error loading notifications:", error);
+      // Don't show error to user, just log it
+    });
+}
+
+// Update notification display
+function updateNotificationDisplay(data) {
+  const container = document.getElementById("floatingNotifications");
+  const summary = document.getElementById("notificationSummary");
+  const countSpan = document.getElementById("notificationCount");
+
+  if (!container || !summary || !countSpan) {
+    return; // Elements not created yet
+  }
+
+  const totalActive = data.total_active || 0;
+
+  // Update summary button
+  if (totalActive > 0) {
+    countSpan.textContent = totalActive;
+    summary.style.display = "flex";
+  } else {
+    summary.style.display = "none";
+    container.innerHTML = "";
+    return;
+  }
+
+  // Show floating notifications if enabled and we have notifications
+  if (showingNotifications && notificationData.length > 0) {
+    renderFloatingNotifications(notificationData.slice(0, 3)); // Show max 3
+  } else {
+    container.innerHTML = "";
+  }
+}
+
+// Render floating notifications
+function renderFloatingNotifications(notifications) {
+  const container = document.getElementById("floatingNotifications");
+
+  if (!container) return;
+
+  container.innerHTML = notifications
+    .map((notif) => {
+      const isUrgent = ["tinggi", "sangat_tinggi"].includes(notif.urgency);
+      const timeAgo = getTimeAgoFixed(notif.created_at);
+
+      return `
+      <div class="notification-item ${
+        isUrgent ? "urgent" : ""
+      }" onclick="goToPengaduan(${notif.id})">
+        <div class="notification-header">
+          <span class="notification-title">Pengaduan Baru - ${escapeHtml(
+            notif.ticket_number || "N/A"
+          )}</span>
+          <button class="notification-close" onclick="event.stopPropagation(); dismissNotification(${
+            notif.id
+          })" title="Tutup">×</button>
+        </div>
+        <div class="notification-content">
+          <strong>${escapeHtml(
+            notif.nama || "Unknown"
+          )}</strong> meminta: "${escapeHtml(
+        notif.judul_dokumen || "Dokumen tidak disebutkan"
+      )}"
+        </div>
+        <div class="notification-meta">
+          <span class="notification-time">
+            <i class="fas fa-clock"></i> ${timeAgo}
+          </span>
+          ${
+            isUrgent
+              ? `<span class="urgency-indicator urgency-${notif.urgency}">
+            ${notif.urgency === "sangat_tinggi" ? "Sangat Urgent" : "Urgent"}
+          </span>`
+              : ""
+          }
+        </div>
+      </div>
+    `;
+    })
+    .join("");
+}
+
+// Update sidebar badge
+function updateSidebarBadge(count) {
+  // Find the pengaduan menu link
+  const pengaduanLink = document.querySelector('a[href*="pengaduan"]');
+
+  if (pengaduanLink) {
+    // Remove existing badge
+    const existingBadge = pengaduanLink.querySelector(".notification-badge");
+    if (existingBadge) {
+      existingBadge.remove();
+    }
+
+    // Add new badge if count > 0
+    if (count > 0) {
+      const badge = document.createElement("span");
+      badge.className = "notification-badge";
+      badge.textContent = count > 99 ? "99+" : count;
+
+      // Make sure link has relative positioning
+      pengaduanLink.style.position = "relative";
+      pengaduanLink.appendChild(badge);
+    }
+  }
+}
+
+// Toggle notifications visibility
+function toggleNotifications() {
+  showingNotifications = !showingNotifications;
+
+  const container = document.getElementById("floatingNotifications");
+  if (!container) return;
+
+  if (showingNotifications) {
+    loadNotifications(); // Reload to show current notifications
+  } else {
+    container.innerHTML = ""; // Hide notifications
+  }
+}
+
+// Dismiss single notification
+function dismissNotification(id) {
+  // Remove from local array
+  notificationData = notificationData.filter((n) => n.id !== id);
+
+  const container = document.getElementById("floatingNotifications");
+  if (!container) return;
+
+  // Re-render with remaining notifications
+  if (notificationData.length > 0) {
+    renderFloatingNotifications(notificationData.slice(0, 3));
+  } else {
+    container.innerHTML = "";
+
+    // Update summary button if no notifications left
+    const summary = document.getElementById("notificationSummary");
+    if (summary && notificationData.length === 0) {
+      summary.style.display = "none";
+    }
+  }
+}
+
+// Navigate to pengaduan page
+function goToPengaduan(id = null) {
+  const baseUrl = "/admin/pengaduan";
+  const url = id ? `${baseUrl}?highlight=${id}` : baseUrl;
+  window.location.href = url;
+}
+
+// Helper function to calculate time ago (FIXED)
+function getTimeAgoFixed(dateString) {
+  if (!dateString) return "Waktu tidak diketahui";
+
+  try {
+    // Parse tanggal dengan timezone yang benar
+    const date = new Date(
+      dateString + (dateString.includes("T") ? "" : "T00:00:00")
+    );
+    const now = new Date();
+
+    // Adjust untuk timezone Indonesia (UTC+7)
+    const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+    if (diffInSeconds < 0) return "Baru saja";
+    if (diffInSeconds < 60) return "Baru saja";
+    if (diffInSeconds < 3600)
+      return Math.floor(diffInSeconds / 60) + " menit lalu";
+    if (diffInSeconds < 86400)
+      return Math.floor(diffInSeconds / 3600) + " jam lalu";
+    if (diffInSeconds < 604800)
+      return Math.floor(diffInSeconds / 86400) + " hari lalu";
+
+    // Untuk lebih dari seminggu, tampilkan tanggal
+    return date.toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+  } catch (error) {
+    console.error("Error parsing date:", error);
+    return "Waktu tidak valid";
+  }
+}
+
+// Helper function to escape HTML
+function escapeHtml(text) {
+  if (!text) return "";
+  const map = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  };
+  return text.toString().replace(/[&<>"']/g, function (m) {
+    return map[m];
+  });
+}
+
+// Clean up interval when page unloads
+function cleanupNotifications() {
+  if (notificationCheckInterval) {
+    clearInterval(notificationCheckInterval);
+    notificationCheckInterval = null;
+  }
+}
+
+// Initialize notifications when DOM is ready
+document.addEventListener("DOMContentLoaded", function () {
+  // Initialize notification system after a small delay to ensure page is ready
+  setTimeout(initNotifications, 1000);
+});
+
+// Clean up on page unload
+window.addEventListener("beforeunload", cleanupNotifications);
+
+// Also clean up if user navigates away (for SPA-like behavior)
+window.addEventListener("pagehide", cleanupNotifications);

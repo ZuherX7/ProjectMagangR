@@ -335,12 +335,18 @@ class User extends BaseController
         $fileName = strtolower($doc['file_name'] ?? '');
         $menuName = strtolower($doc['nama_menu'] ?? '');
         $categoryName = strtolower($doc['nama_kategori'] ?? '');
+        $tags = strtolower($doc['tags'] ?? ''); // <-- TAMBAH INI
         
         foreach ($searchTerms as $term) {
             if (strlen($term) > 2) {
                 // Title matches are worth most
                 if (strpos($title, $term) !== false) {
                     $score += 3;
+                }
+                
+                // Tags matches (HIGH PRIORITY)
+                if (strpos($tags, $term) !== false) {
+                    $score += 2.5; // <-- TAMBAH INI
                 }
                 
                 // Description matches
@@ -366,7 +372,7 @@ class User extends BaseController
         }
         
         // Normalize score (0-1 scale)
-        $maxPossibleScore = count($searchTerms) * 8; // 3+2+1+1+1 per term
+        $maxPossibleScore = count($searchTerms) * 10.5; // <-- UPDATE: 3+2.5+2+1+1+1
         return $maxPossibleScore > 0 ? $score / $maxPossibleScore : 0;
     }
 

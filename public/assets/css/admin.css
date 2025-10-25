@@ -170,6 +170,7 @@ body {
   flex: 1;
   margin-left: 260px;
   min-height: 100vh;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .content-header {
@@ -217,6 +218,7 @@ body {
 /* =============== DASHBOARD CONTENT =============== */
 .dashboard-content {
   padding: 30px;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .welcome-section {
@@ -663,13 +665,14 @@ body {
   border-color: #2c5aa0;
 }
 
-/* =============== TABLE COMPONENTS =============== */
+/* =============== TABLE COMPONENTS - OPTIMIZED FOR NO HORIZONTAL SCROLL =============== */
 .table-container {
   background: white;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   margin-top: 20px;
+  width: 100%;
 }
 
 .table-header {
@@ -688,102 +691,84 @@ body {
 
 .table-responsive {
   overflow-x: auto;
+  max-width: 100%;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 100%;
+  table-layout: fixed; /* Fixed table layout for consistent column widths */
 }
+
+/* Document Table Optimized Column Widths - No Horizontal Scroll */
+.table th:nth-child(1) {
+  width: 4%;
+  min-width: 40px;
+} /* No */
+.table th:nth-child(2) {
+  width: 18%;
+  min-width: 150px;
+} /* Dokumen */
+.table th:nth-child(3) {
+  width: 11%;
+  min-width: 85px;
+} /* Kategori */
+.table th:nth-child(4) {
+  width: 11%;
+  min-width: 85px;
+} /* Menu */
+.table th:nth-child(5) {
+  width: 16%;
+  min-width: 130px;
+} /* File */
+.table th:nth-child(6) {
+  width: 13%;
+  min-width: 105px;
+} /* Waktu Upload */
+.table th:nth-child(7) {
+  width: 9%;
+  min-width: 70px;
+} /* Statistik */
+.table th:nth-child(8) {
+  width: 9%;
+  min-width: 70px;
+} /* Status & Akses */
+.table th:nth-child(9) {
+  width: 9%;
+  min-width: 85px;
+} /* Aksi */
 
 .table th {
   background: #f8f9fa;
-  padding: 12px 8px;
+  padding: 10px 6px;
   text-align: left;
   font-weight: 600;
   color: #555;
   border-bottom: 1px solid #e9ecef;
   white-space: nowrap;
-  font-size: 13px;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .table td {
-  padding: 12px 8px;
+  padding: 10px 6px;
   border-bottom: 1px solid #f8f9fa;
   vertical-align: middle;
-  font-size: 13px;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table td:nth-child(2),
+.table td:nth-child(5) {
+  white-space: normal; /* Allow wrapping for document title and file info */
 }
 
 .table tr:hover {
   background: #f8f9fa;
 }
-
-/* Document Table Specific Styles */
-.table th:nth-child(1) {
-  width: 50px;
-} /* No */
-.table th:nth-child(2) {
-  width: 30%;
-  min-width: 220px;
-} /* Dokumen */
-.table th:nth-child(3) {
-  width: 12%;
-  min-width: 100px;
-} /* Kategori */
-.table th:nth-child(4) {
-  width: 12%;
-  min-width: 100px;
-} /* Menu */
-.table th:nth-child(5) {
-  width: 15%;
-  min-width: 140px;
-} /* File */
-.table th:nth-child(6) {
-  width: 12%;
-  min-width: 110px;
-} /* Waktu */
-.table th:nth-child(7) {
-  width: 10%;
-  min-width: 80px;
-} /* Statistik */
-.table th:nth-child(8) {
-  width: 8%;
-  min-width: 70px;
-} /* Status */
-.table th:nth-child(9) {
-  width: 11%;
-  min-width: 100px;
-} /* Aksi */
-
-/* User Management Table - Optimized Layout */
-.table th:nth-child(1) {
-  width: 50px;
-  text-align: center;
-} /* No - lebih kecil */
-.table th:nth-child(2) {
-  width: 30%;
-  min-width: 200px;
-} /* User */
-.table th:nth-child(3) {
-  width: 30%;
-  min-width: 120px;
-} /* NIP */
-.table th:nth-child(4) {
-  width: 10%;
-  min-width: 80px;
-} /* Role */
-.table th:nth-child(5) {
-  width: 10%;
-  min-width: 80px;
-} /* Status */
-.table th:nth-child(6) {
-  width: 15%;
-  min-width: 120px;
-} /* Terdaftar */
-.table th:nth-child(7) {
-  width: 20%;
-  min-width: 120px;
-} /* Aksi */
 
 .table:not(.menu-table) td:nth-child(1) {
   text-align: center;
@@ -794,18 +779,18 @@ body {
 .file-info {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .file-icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 9px;
+  font-size: 8px;
   flex-shrink: 0;
 }
 
@@ -831,23 +816,24 @@ body {
   margin-bottom: 2px;
   line-height: 1.3;
   word-break: break-word;
+  font-size: 12px;
 }
 
 .document-meta {
-  font-size: 11px;
+  font-size: 10px;
   color: #6c757d;
   line-height: 1.3;
 }
 
 .upload-time {
-  font-size: 12px;
+  font-size: 11px;
   color: #333;
   font-weight: 500;
   line-height: 1.2;
 }
 
 .upload-meta {
-  font-size: 10px;
+  font-size: 9px;
   color: #6c757d;
   margin-top: 2px;
   line-height: 1.2;
@@ -857,7 +843,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  font-size: 11px;
+  font-size: 10px;
   color: #6c757d;
 }
 
@@ -1022,30 +1008,34 @@ body {
 }
 
 .btn-sm {
-  padding: 6px 10px;
-  font-size: 12px;
+  padding: 4px 8px;
+  font-size: 11px;
   border-radius: 4px;
 }
 
 /* Action buttons optimization */
 .action-buttons {
   display: flex;
-  gap: 6px;
+  gap: 3px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .action-buttons .btn-sm {
-  padding: 4px 6px;
+  padding: 3px 5px;
   min-width: auto;
 }
 
 /* =============== BADGES =============== */
 .badge {
-  padding: 3px 6px;
+  padding: 2px 6px;
   border-radius: 3px;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 500;
   text-transform: uppercase;
+  white-space: nowrap;
+  display: inline-block;
+  margin: 1px;
 }
 
 .badge-success {
@@ -1068,13 +1058,14 @@ body {
   color: #0c5460;
 }
 
-/* Enhanced badge styles */
-.badge {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
+.badge-publik {
+  background-color: #28a745;
+  color: white;
+}
+
+.badge-privat {
+  background-color: #6c757d;
+  color: white;
 }
 
 /* =============== MODALS =============== */
@@ -1242,6 +1233,19 @@ body {
 }
 
 /* =============== RESPONSIVE =============== */
+@media (max-width: 1200px) {
+  /* Adjust table for smaller screens */
+  .table th:nth-child(2) {
+    width: 20%;
+  } /* Dokumen */
+  .table th:nth-child(5) {
+    width: 15%;
+  } /* File */
+  .table th:nth-child(6) {
+    width: 12%;
+  } /* Waktu Upload */
+}
+
 @media (max-width: 1024px) {
   .sidebar {
     transform: translateX(-100%);
@@ -1264,26 +1268,36 @@ body {
     padding: 20px;
   }
 
-  /* Table responsive for tablets */
+  /* Further optimize table columns for tablets */
+  .table th:nth-child(1) {
+    width: 5%;
+  } /* No */
+  .table th:nth-child(2) {
+    width: 22%;
+  } /* Dokumen */
+  .table th:nth-child(3) {
+    width: 10%;
+  } /* Kategori */
+  .table th:nth-child(4) {
+    width: 10%;
+  } /* Menu */
+  .table th:nth-child(5) {
+    width: 18%;
+  } /* File */
+  .table th:nth-child(6) {
+    width: 15%;
+  } /* Waktu Upload */
+  .table th:nth-child(7) {
+    width: 8%;
+  } /* Statistik */
+  .table th:nth-child(8) {
+    width: 12%;
+  } /* Status & Akses */
+
   .table th,
   .table td {
-    padding: 10px 6px;
-    font-size: 12px;
-  }
-
-  .table th:nth-child(2) {
-    min-width: 180px;
-  }
-  .table th:nth-child(5) {
-    min-width: 130px;
-  }
-
-  .table-container {
-    overflow-x: auto;
-  }
-
-  .table {
-    min-width: 800px;
+    padding: 8px 4px;
+    font-size: 11px;
   }
 }
 
@@ -1345,25 +1359,6 @@ body {
     font-size: 24px;
   }
 
-  .stats-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .stat-card {
-    padding: 20px;
-  }
-
-  .stat-icon {
-    width: 60px;
-    height: 60px;
-    margin-right: 16px;
-  }
-
-  .stat-content h3 {
-    font-size: 28px;
-  }
-
   .recent-section,
   .quick-actions {
     padding: 20px;
@@ -1373,60 +1368,67 @@ body {
     grid-template-columns: 1fr;
   }
 
-  /* Table responsive for mobile */
+  /* Mobile table optimization - stack columns vertically */
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table {
+    min-width: 700px; /* Minimum width to prevent too much cramping */
+  }
+
+  .table th:nth-child(1) {
+    width: 6%;
+  } /* No */
+  .table th:nth-child(2) {
+    width: 30%;
+  } /* Dokumen */
+  .table th:nth-child(3) {
+    width: 12%;
+  } /* Kategori */
+  .table th:nth-child(4) {
+    width: 12%;
+  } /* Menu */
+  .table th:nth-child(5) {
+    width: 20%;
+  } /* File */
+  .table th:nth-child(6) {
+    display: none;
+  } /* Hide Waktu Upload on mobile */
+  .table th:nth-child(7) {
+    width: 10%;
+  } /* Statistik */
+  .table th:nth-child(8) {
+    width: 10%;
+  } /* Status & Akses */
+
+  .table td:nth-child(6) {
+    display: none;
+  } /* Hide Waktu Upload column data */
+
   .table-header {
     flex-direction: column;
     gap: 15px;
     align-items: stretch;
   }
 
-  .table th,
-  .table td {
-    padding: 8px 4px;
-    font-size: 12px;
-  }
-
-  .table th:nth-child(1) {
-    width: 40px;
-  } /* No - lebih kecil lagi untuk mobile */
-  .table th:nth-child(2) {
-    min-width: 150px;
-  } /* User */
-  .table th:nth-child(3) {
-    min-width: 80px;
-  } /* NIP */
-  .table th:nth-child(4) {
-    min-width: 60px;
-  } /* Role */
-  .table th:nth-child(5) {
-    min-width: 70px;
-  } /* Status */
-  .table th:nth-child(6) {
-    min-width: 90px;
-  } /* Terdaftar */
-  .table th:nth-child(7) {
-    min-width: 100px;
-  } /* Aksi */
-
   .document-title {
-    font-size: 12px;
-  }
-
-  .document-meta {
-    font-size: 10px;
-  }
-
-  .upload-time {
     font-size: 11px;
   }
 
-  .upload-meta {
+  .document-meta {
     font-size: 9px;
   }
 
   .action-buttons .btn-sm {
-    padding: 3px 5px;
-    font-size: 11px;
+    padding: 2px 4px;
+    font-size: 10px;
+  }
+
+  .badge {
+    font-size: 8px;
+    padding: 1px 4px;
   }
 
   .modal-content {
@@ -1463,7 +1465,286 @@ body {
     margin: 20px;
   }
 
+  /* Ultra compact table for very small screens */
+  .table {
+    min-width: 600px;
+  }
+
   .table th:nth-child(1) {
-    width: 35px;
-  } /* No - sangat kecil untuk mobile */
+    width: 8%;
+  } /* No */
+  .table th:nth-child(2) {
+    width: 35%;
+  } /* Dokumen */
+  .table th:nth-child(3) {
+    display: none;
+  } /* Hide Kategori */
+  .table th:nth-child(4) {
+    display: none;
+  } /* Hide Menu */
+  .table th:nth-child(5) {
+    width: 25%;
+  } /* File */
+  .table th:nth-child(6) {
+    display: none;
+  } /* Hide Waktu Upload */
+  .table th:nth-child(7) {
+    width: 12%;
+  } /* Statistik */
+  .table th:nth-child(8) {
+    width: 20%;
+  } /* Status & Akses */
+
+  .table td:nth-child(3),
+  .table td:nth-child(4),
+  .table td:nth-child(6) {
+    display: none;
+  }
+}
+
+/* =============== NOTIFICATION SYSTEM =============== */
+/* Tambahkan CSS ini di bagian bawah file admin.css */
+
+/* Notification Badge untuk Sidebar */
+.notification-container {
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #dc3545;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 20px;
+  text-align: center;
+  animation: pulse 2s infinite;
+  z-index: 10;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Floating Notifications - BOTTOM RIGHT ABOVE BUTTON */
+.floating-notifications {
+  position: fixed;
+  bottom: 70px; /* Positioned above the summary button */
+  right: 20px;
+  z-index: 1000;
+  max-width: 350px;
+}
+
+.notification-item {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-left: 4px solid #f39c12;
+  animation: slideInRight 0.5s ease-out;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  max-width: 100%;
+}
+
+.notification-item:hover {
+  transform: translateX(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+.notification-item.urgent {
+  border-left-color: #e74c3c;
+  background: linear-gradient(135deg, #fff 0%, #ffebee 100%);
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.notification-title {
+  font-weight: 600;
+  font-size: 13px;
+  color: #2c3e50;
+  flex: 1;
+}
+
+.notification-time {
+  font-size: 11px;
+  color: #7f8c8d;
+  margin-left: 10px;
+}
+
+.notification-content {
+  font-size: 12px;
+  color: #5a6c7d;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.notification-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 11px;
+}
+
+.urgency-indicator {
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+.urgency-tinggi {
+  background: #ffecec;
+  color: #c0392b;
+}
+
+.urgency-sangat_tinggi {
+  background: #c0392b;
+  color: white;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: #bdc3c7;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 10px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.notification-close:hover {
+  background: #ecf0f1;
+  color: #7f8c8d;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Notification Summary Button - BOTTOM RIGHT CORNER */
+.notification-summary {
+  position: fixed;
+  bottom: 20px; /* At the very bottom */
+  right: 20px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 999;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notification-summary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+.notification-summary i {
+  font-size: 14px;
+}
+
+/* Responsive adjustments for notifications */
+/* Responsive adjustments for notifications */
+@media (max-width: 768px) {
+  .floating-notifications {
+    bottom: 65px; /* Above button on mobile */
+    left: 10px;
+    right: 10px;
+    max-width: none;
+    width: calc(100% - 20px);
+  }
+
+  .notification-item:hover {
+    transform: translateY(-2px); /* Mobile hover effect */
+  }
+
+  .notification-summary {
+    bottom: 20px; /* At bottom on mobile */
+    right: 10px;
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+
+  .notification-item {
+    padding: 12px;
+  }
+
+  .notification-title {
+    font-size: 12px;
+  }
+
+  .notification-content {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-notifications {
+    bottom: 60px; /* Adjust for very small screens */
+  }
+
+  .notification-item {
+    margin-bottom: 8px;
+    padding: 10px;
+  }
+
+  .notification-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .notification-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
 }

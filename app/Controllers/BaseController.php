@@ -16,7 +16,7 @@ use Psr\Log\LoggerInterface;
 abstract class BaseController extends Controller
 {
     protected $request;
-    protected $helpers = ['url', 'form', 'session'];
+    protected $helpers = ['url', 'form', 'session', 'tag'];
     protected $session;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)

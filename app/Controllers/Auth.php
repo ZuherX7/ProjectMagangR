@@ -27,7 +27,7 @@ class Auth extends BaseController
 
     public function login()
     {
-        // Jika sudah login, redirect ke dashboard
+        // Jika sudah login, redirect ke dashboard sesuai role
         if ($this->isLoggedIn()) {
             return $this->redirectBasedOnRole();
         }
@@ -138,7 +138,7 @@ class Auth extends BaseController
     }
 
     // ============================================
-    // PROSES LOGIN - INI YANG ERROR SEBELUMNYA
+    // PROSES LOGIN - FIXED UNTUK LANDING PAGE
     // ============================================
     
     public function processLogin()
@@ -162,7 +162,7 @@ class Auth extends BaseController
         if ($loginType === 'admin') {
             $rules['username'] = 'required|min_length[3]';
         } else {
-            $rules['nip'] = 'required|min_length[3]'; // Ubah jadi 3 untuk test
+            $rules['nip'] = 'required|min_length[3]';
         }
 
         // Cek validasi
@@ -248,13 +248,13 @@ class Auth extends BaseController
             log_message('error', 'Gagal log activity: ' . $e->getMessage());
         }
 
-        // Redirect ke dashboard sesuai role
+        // FIXED: Redirect ke dashboard sesuai role, bukan landing page
         log_message('info', 'Login berhasil untuk user: ' . $user['nama_lengkap']);
         return $this->redirectBasedOnRole();
     }
 
     // ============================================
-    // LOGOUT
+    // LOGOUT - FIXED UNTUK LANDING PAGE
     // ============================================
     
     public function logout()
@@ -277,8 +277,8 @@ class Auth extends BaseController
         // Hapus session
         session()->destroy();
 
-        // Redirect ke login
-        return redirect()->to('/login')->with('success', 'Berhasil logout');
+        // FIXED: Redirect ke landing page, bukan login page
+        return redirect()->to('/')->with('success', 'Berhasil logout');
     }
 
     // ============================================

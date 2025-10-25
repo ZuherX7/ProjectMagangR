@@ -243,6 +243,13 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="<?= base_url('admin/pengaduan') ?>" class="nav-link">
+                            <i class="fas fa-headset"></i>
+                            <span>Kelola Pengaduan</span>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
             
@@ -431,6 +438,28 @@
                     <?= csrf_field() ?>
                     
                     <div class="form-group">
+                        <label for="edit_menu_id" class="form-label">Menu *</label>
+                        <select class="form-control" id="edit_menu_id" name="menu_id" required>
+                            <option value="">Pilih Menu</option>
+                            <?php if (!empty($menu)): ?>
+                                <?php foreach ($menu as $m): ?>
+                                    <option value="<?= $m['id'] ?>"><?= esc($m['nama_menu']) ?></option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit_nama_kategori" class="form-label">Nama Kategori *</label>
+                        <input type="text" class="form-control" id="edit_nama_kategori" name="nama_kategori" required maxlength="100" placeholder="Masukkan nama kategori">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit_deskripsi" class="form-label">Deskripsi</label>
+                        <textarea class="form-control" id="edit_deskripsi" name="deskripsi" rows="3" maxlength="500" placeholder="Deskripsi kategori (opsional)"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="edit_status" class="form-label">Status *</label>
                         <select class="form-control" id="edit_status" name="status" required>
                             <option value="aktif">Aktif</option>
@@ -567,5 +596,6 @@
             });
         }
     </script>
+    <script src="<?= base_url('assets/js/admin.js') ?>"></script>
 </body>
 </html>

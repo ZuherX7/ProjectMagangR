@@ -258,6 +258,14 @@
                             <span>Kelola User</span>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="<?= base_url('admin/pengaduan') ?>" class="nav-link">
+                            <i class="fas fa-headset"></i>
+                            <span>Kelola Pengaduan</span>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
             
@@ -557,5 +565,6 @@
             });
         }
     </script>
+    <script src="<?= base_url('assets/js/admin.js') ?>"></script>
 </body>
 </html>

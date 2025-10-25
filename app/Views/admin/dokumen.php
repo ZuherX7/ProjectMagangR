@@ -122,6 +122,17 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
+        /* Badge styles untuk akses */
+        .badge.badge-publik {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .badge.badge-privat {
+            background-color: #6c757d;
+            color: white;
+        }
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .main-content::before {
@@ -143,6 +154,20 @@
                 padding: 20px;
                 margin-bottom: 20px;
             }
+        }
+
+        /* TAMBAHKAN INI DI DALAM TAG <style> YANG ADA */
+        .form-helper {
+            font-size: 11px;
+            color: #666;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .form-helper i {
+            color: #667eea;
         }
     </style>
 </head>
@@ -194,6 +219,14 @@
                             <span>Kelola User</span>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="<?= base_url('admin/pengaduan') ?>" class="nav-link">
+                            <i class="fas fa-headset"></i>
+                            <span>Kelola Pengaduan</span>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
             
@@ -220,7 +253,6 @@
                 </div>
             </header>
 
-            <!-- Content -->
             <!-- Content -->
             <div class="dashboard-content">
                 <!-- Alert Messages -->
@@ -259,7 +291,7 @@
                                     <th>File</th>
                                     <th>Waktu Upload</th>
                                     <th>Statistik</th>
-                                    <th>Status</th>
+                                    <th>Status & Akses</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -302,11 +334,19 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <?php if ($doc['status'] === 'aktif'): ?>
-                                                    <span class="badge badge-success">Aktif</span>
-                                                <?php else: ?>
-                                                    <span class="badge badge-warning">Nonaktif</span>
-                                                <?php endif; ?>
+                                                <div style="display: flex; flex-direction: column; gap: 3px; align-items: center;">
+                                                    <?php if ($doc['status'] === 'aktif'): ?>
+                                                        <span class="badge badge-success">Aktif</span>
+                                                    <?php else: ?>
+                                                        <span class="badge badge-warning">Nonaktif</span>
+                                                    <?php endif; ?>
+                                                    
+                                                    <?php if ($doc['akses'] === 'publik'): ?>
+                                                        <span class="badge badge-publik">Publik</span>
+                                                    <?php else: ?>
+                                                        <span class="badge badge-privat">Privat</span>
+                                                    <?php endif; ?>
+                                                </div>
                                             </td>
                                             <td>
                                                 <div class="action-buttons">
@@ -316,8 +356,13 @@
                                                     <button class="btn btn-danger btn-sm" onclick="deleteDocument(<?= $doc['id'] ?>, '<?= esc($doc['judul']) ?>')" title="Hapus">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
-                                                    <a href="<?= base_url('files/' . $doc['file_path']) ?>" target="_blank" class="btn btn-success btn-sm" title="Lihat">
+                                                    <!-- Button View: Increment Views Counter -->
+                                                    <a href="<?= base_url('admin/dokumen/view/' . $doc['id']) ?>" target="_blank" class="btn btn-success btn-sm" title="Lihat">
                                                         <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <!-- Button Download: Increment Downloads Counter -->
+                                                    <a href="<?= base_url('admin/dokumen/download/' . $doc['id']) ?>" class="btn btn-info btn-sm" title="Download">
+                                                        <i class="fas fa-download"></i>
                                                     </a>
                                                 </div>
                                             </td>
@@ -361,7 +406,21 @@
                         <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" maxlength="1000" placeholder="Deskripsi singkat dokumen (opsional)"></textarea>
                     </div>
 
-                    <!-- Add Document Modal - Form Section yang diupdate -->
+                    <div class="form-group">
+                        <label for="tags" class="form-label">Tags / Kata Kunci</label>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="form-control" id="tags" name="tags" maxlength="255" placeholder="Contoh: laporan, keuangan, 2024" style="flex: 1;">
+                            <button type="button" class="btn btn-secondary" onclick="generateTags()" title="Generate otomatis dari judul, menu & kategori">
+                                <i class="fas fa-magic"></i> Auto
+                            </button>
+                        </div>
+                        <div class="form-helper">
+                            <i class="fas fa-info-circle"></i>
+                            Pisahkan dengan koma. Klik "Auto" untuk generate otomatis dari judul/menu/kategori.
+                        </div>
+                        <div id="suggested-tags" style="margin-top: 8px;"></div>
+                    </div>
+
                     <div style="display: flex; gap: 16px;">
                         <div class="form-group" style="flex: 1;">
                             <label for="menu_id" class="form-label">Menu *</label>
@@ -379,6 +438,24 @@
                             <label for="kategori_id" class="form-label">Kategori *</label>
                             <select class="form-control" id="kategori_id" name="kategori_id" required disabled>
                                 <option value="">Pilih Menu terlebih dahulu</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 16px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label for="status" class="form-label">Status *</label>
+                            <select class="form-control" id="status" name="status" required>
+                                <option value="aktif">Aktif</option>
+                                <option value="nonaktif">Nonaktif</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="flex: 1;">
+                            <label for="akses" class="form-label">Akses *</label>
+                            <select class="form-control" id="akses" name="akses" required>
+                                <option value="privat">Privat</option>
+                                <option value="publik">Publik</option>
                             </select>
                         </div>
                     </div>
@@ -425,6 +502,21 @@
                         <textarea class="form-control" id="edit_deskripsi" name="deskripsi" rows="3" maxlength="1000"></textarea>
                     </div>
 
+                    <div class="form-group">
+                        <label for="edit_tags" class="form-label">Tags / Kata Kunci</label>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" class="form-control" id="edit_tags" name="tags" maxlength="255" placeholder="Contoh: laporan, keuangan, 2024" style="flex: 1;">
+                            <button type="button" class="btn btn-secondary" onclick="generateTagsEdit()" title="Generate otomatis dari judul, menu & kategori">
+                                <i class="fas fa-magic"></i> Auto
+                            </button>
+                        </div>
+                        <div class="form-helper">
+                            <i class="fas fa-info-circle"></i>
+                            Pisahkan dengan koma. Klik "Auto" untuk generate otomatis.
+                        </div>
+                        <div id="edit-suggested-tags" style="margin-top: 8px;"></div>
+                    </div>
+
                     <div style="display: flex; gap: 16px;">
                         <div class="form-group" style="flex: 1;">
                             <label for="edit_menu_id" class="form-label">Menu *</label>
@@ -446,12 +538,22 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="edit_status" class="form-label">Status *</label>
-                        <select class="form-control" id="edit_status" name="status" required>
-                            <option value="aktif">Aktif</option>
-                            <option value="nonaktif">Nonaktif</option>
-                        </select>
+                    <div style="display: flex; gap: 16px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label for="edit_status" class="form-label">Status *</label>
+                            <select class="form-control" id="edit_status" name="status" required>
+                                <option value="aktif">Aktif</option>
+                                <option value="nonaktif">Nonaktif</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="flex: 1;">
+                            <label for="edit_akses" class="form-label">Akses *</label>
+                            <select class="form-control" id="edit_akses" name="akses" required>
+                                <option value="privat">Privat</option>
+                                <option value="publik">Publik</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -484,9 +586,7 @@
             document.getElementById(modalId).classList.remove('active');
         }
 
-        // Perbaikan untuk function editDocument di dokumen.php
-
-        // Tambahkan data dokumen ke dalam JavaScript (di bagian bawah dokumen.php)
+        // Tambahkan data dokumen ke dalam JavaScript
         const dokumenData = <?= json_encode($dokumen) ?>;
 
         function editDocument(id) {
@@ -502,47 +602,19 @@
             document.getElementById('edit_id').value = doc.id;
             document.getElementById('edit_judul').value = doc.judul;
             document.getElementById('edit_deskripsi').value = doc.deskripsi || '';
-            document.getElementById('edit_kategori_id').value = doc.kategori_id;
+            document.getElementById('edit_tags').value = doc.tags || '';
             document.getElementById('edit_menu_id').value = doc.menu_id;
             document.getElementById('edit_status').value = doc.status;
+            document.getElementById('edit_akses').value = doc.akses;
+            
+            // Load kategori berdasarkan menu yang dipilih, lalu set kategori yang terpilih
+            loadKategoriByMenu(doc.menu_id, 'edit_kategori_id', doc.kategori_id);
             
             // Set form action
             document.getElementById('editForm').action = `<?= base_url('admin/dokumen/edit/') ?>${id}`;
             
             // Buka modal
             document.getElementById('editModal').classList.add('active');
-        }
-
-        // Alternative: Menggunakan AJAX untuk mengambil data dokumen
-        function editDocumentAjax(id) {
-            // Buka modal terlebih dahulu
-            document.getElementById('editModal').classList.add('active');
-            
-            // Set form action
-            document.getElementById('editForm').action = `<?= base_url('admin/dokumen/edit/') ?>${id}`;
-            
-            // Load data via AJAX (jika Anda ingin membuat endpoint API)
-            fetch(`<?= base_url('admin/dokumen/get/') ?>${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        const doc = data.dokumen;
-                        document.getElementById('edit_id').value = doc.id;
-                        document.getElementById('edit_judul').value = doc.judul;
-                        document.getElementById('edit_deskripsi').value = doc.deskripsi || '';
-                        document.getElementById('edit_kategori_id').value = doc.kategori_id;
-                        document.getElementById('edit_menu_id').value = doc.menu_id;
-                        document.getElementById('edit_status').value = doc.status;
-                    } else {
-                        alert('Gagal memuat data dokumen');
-                        closeModal('editModal');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat memuat data');
-                    closeModal('editModal');
-                });
         }
 
         function deleteDocument(id, title) {
@@ -587,8 +659,6 @@
             return round($size, $precision) . ' ' . $units[$i];
         }
         ?>
-
-        // Tambahkan script ini ke bagian bawah dokumen.php (setelah script yang sudah ada)
 
         // Update fungsi loadKategoriByMenu untuk handle disabled state
         function loadKategoriByMenu(menuId, targetSelectId, selectedKategoriId = null) {
@@ -648,33 +718,6 @@
             loadKategoriByMenu(menuId, 'edit_kategori_id');
         });
 
-        // Update fungsi editDocument untuk handle cascading dropdown
-        function editDocument(id) {
-            // Cari data dokumen berdasarkan ID
-            const doc = dokumenData.find(d => d.id == id);
-            
-            if (!doc) {
-                alert('Data dokumen tidak ditemukan!');
-                return;
-            }
-            
-            // Isi form dengan data dokumen
-            document.getElementById('edit_id').value = doc.id;
-            document.getElementById('edit_judul').value = doc.judul;
-            document.getElementById('edit_deskripsi').value = doc.deskripsi || '';
-            document.getElementById('edit_menu_id').value = doc.menu_id;
-            document.getElementById('edit_status').value = doc.status;
-            
-            // Load kategori berdasarkan menu yang dipilih, lalu set kategori yang terpilih
-            loadKategoriByMenu(doc.menu_id, 'edit_kategori_id', doc.kategori_id);
-            
-            // Set form action
-            document.getElementById('editForm').action = `<?= base_url('admin/dokumen/edit/') ?>${id}`;
-            
-            // Buka modal
-            document.getElementById('editModal').classList.add('active');
-        }
-
         // Update fungsi openAddModal untuk reset form state
         function openAddModal() {
             // Reset form
@@ -713,6 +756,114 @@
                 loadKategoriByMenu(selectedMenuId, 'kategori_id', selectedKategoriId);
             }
         });
+
+        // Generate tags from title, menu, and category (ADD FORM)
+        function generateTags() {
+            const judul = document.getElementById('judul').value.trim();
+            const menuId = document.getElementById('menu_id').value;
+            const kategoriId = document.getElementById('kategori_id').value;
+            
+            if (!judul) {
+                alert('Masukkan judul dokumen terlebih dahulu');
+                return;
+            }
+            
+            if (!menuId || !kategoriId) {
+                alert('Pilih menu dan kategori terlebih dahulu');
+                return;
+            }
+            
+            // Get menu and kategori names
+            const menuSelect = document.getElementById('menu_id');
+            const kategoriSelect = document.getElementById('kategori_id');
+            const menuName = menuSelect.options[menuSelect.selectedIndex].text;
+            const kategoriName = kategoriSelect.options[kategoriSelect.selectedIndex].text;
+            
+            // Simple client-side tag generation
+            const tags = generateTagsFromData(judul, menuName, kategoriName);
+            document.getElementById('tags').value = tags;
+            
+            // Show success indicator
+            const suggestedDiv = document.getElementById('suggested-tags');
+            suggestedDiv.innerHTML = '<small style="color: #28a745;"><i class="fas fa-check-circle"></i> Tags berhasil di-generate! Anda bisa edit manual.</small>';
+            setTimeout(() => suggestedDiv.innerHTML = '', 3000);
+        }
+
+        // Generate tags for EDIT FORM
+        function generateTagsEdit() {
+            const judul = document.getElementById('edit_judul').value.trim();
+            const menuId = document.getElementById('edit_menu_id').value;
+            const kategoriId = document.getElementById('edit_kategori_id').value;
+            
+            if (!judul) {
+                alert('Masukkan judul dokumen terlebih dahulu');
+                return;
+            }
+            
+            if (!menuId || !kategoriId) {
+                alert('Pilih menu dan kategori terlebih dahulu');
+                return;
+            }
+            
+            const menuSelect = document.getElementById('edit_menu_id');
+            const kategoriSelect = document.getElementById('edit_kategori_id');
+            const menuName = menuSelect.options[menuSelect.selectedIndex].text;
+            const kategoriName = kategoriSelect.options[kategoriSelect.selectedIndex].text;
+            
+            const tags = generateTagsFromData(judul, menuName, kategoriName);
+            document.getElementById('edit_tags').value = tags;
+            
+            const suggestedDiv = document.getElementById('edit-suggested-tags');
+            suggestedDiv.innerHTML = '<small style="color: #28a745;"><i class="fas fa-check-circle"></i> Tags berhasil di-generate!</small>';
+            setTimeout(() => suggestedDiv.innerHTML = '', 3000);
+        }
+
+        // Core function to generate tags from data
+        function generateTagsFromData(judul, menuName, kategoriName) {
+            const stopWords = ['dan', 'atau', 'untuk', 'dari', 'ke', 'di', 'pada', 'yang', 'adalah', 'dengan', 'oleh', 'tentang', 'akan', 'telah', 'sudah', 'dokumen', 'file'];
+            const tags = [];
+            
+            // Extract from title
+            const titleWords = judul.toLowerCase().split(/[\s\-_]+/);
+            titleWords.forEach(word => {
+                word = word.trim();
+                if (word.length >= 3 && !stopWords.includes(word) && !tags.includes(word)) {
+                    tags.push(word);
+                }
+            });
+            
+            // Extract from menu
+            if (menuName) {
+                const menuWords = menuName.toLowerCase().split(/[\s\-_]+/);
+                menuWords.forEach(word => {
+                    word = word.trim();
+                    if (word.length >= 3 && !stopWords.includes(word) && !tags.includes(word)) {
+                        tags.push(word);
+                    }
+                });
+            }
+            
+            // Extract from category
+            if (kategoriName) {
+                const kategoriWords = kategoriName.toLowerCase().split(/[\s\-_]+/);
+                kategoriWords.forEach(word => {
+                    word = word.trim();
+                    if (word.length >= 3 && !stopWords.includes(word) && !tags.includes(word)) {
+                        tags.push(word);
+                    }
+                });
+            }
+            
+            // Extract year (2020-2030)
+            const yearMatch = judul.match(/\b(20[2-3][0-9])\b/);
+            if (yearMatch && !tags.includes(yearMatch[1])) {
+                tags.push(yearMatch[1]);
+            }
+            
+            // Limit to 8 tags
+            return tags.slice(0, 8).join(', ');
+        }
     </script>
+    <script src="<?= base_url('assets/js/admin.js') ?>"></script>
 </body>
 </html>

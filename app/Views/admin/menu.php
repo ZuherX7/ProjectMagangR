@@ -194,6 +194,13 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="<?= base_url('admin/pengaduan') ?>" class="nav-link">
+                            <i class="fas fa-headset"></i>
+                            <span>Kelola Pengaduan</span>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
             
@@ -251,18 +258,24 @@
                         <table class="table menu-table">
                             <thead>
                                 <tr>
+                                    <th style="width: 5%; text-align: center;">No</th>
                                     <th style="width: 20%;">Menu</th>
                                     <th style="width: 25%;">Deskripsi</th>
                                     <th style="width: 15%;">Jumlah Dokumen</th>
                                     <th style="width: 15%;">Tanggal Dibuat</th>
                                     <th style="width: 10%;">Status</th>
-                                    <th style="width: 15%;">Aksi</th>
+                                    <th style="width: 10%;">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if (!empty($menu)): ?>
-                                    <?php foreach ($menu as $m): ?>
+                                    <!-- UBAH: Tambah $no variable untuk counter -->
+                                    <?php $no = 1; foreach ($menu as $m): ?>
                                         <tr>
+                                            <!-- BARU: Kolom No dengan counter -->
+                                            <td style="text-align: center; font-weight: 600; color: #000">
+                                                <?= $no++ ?>
+                                            </td>
                                             <td>
                                                 <div class="menu-info">
                                                     <div class="menu-icon">
@@ -319,7 +332,7 @@
                                     <?php endforeach; ?>
                                 <?php else: ?>
                                     <tr>
-                                        <td colspan="6" style="text-align: center; padding: 40px;">
+                                        <td colspan="7" style="text-align: center; padding: 40px;">
                                             <i class="fas fa-bars" style="font-size: 48px; color: #ccc; margin-bottom: 16px;"></i>
                                             <div>Belum ada menu</div>
                                             <div style="font-size: 12px; color: #6c757d;">Klik tombol "Tambah Menu" untuk membuat menu pertama</div>
@@ -378,7 +391,7 @@
         </div>
     </div>
 
-    <!-- Edit Modal - Tambahkan field urutan -->
+    <!-- Edit Modal -->
     <div id="editModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -439,20 +452,16 @@
             document.getElementById(modalId).classList.remove('active');
         }
 
-        // Update fungsi editMenu untuk include urutan
         function editMenu(id, nama, deskripsi, icon, status) {
             document.getElementById('editModal').classList.add('active');
             document.getElementById('editForm').action = `<?= base_url('admin/menu/edit/') ?>${id}`;
             document.getElementById('edit_nama_menu').value = nama;
             document.getElementById('edit_deskripsi').value = deskripsi;
             document.getElementById('edit_icon').value = icon;
-            // document.getElementById('edit_urutan').value = urutan; // Tambahkan ini
             document.getElementById('edit_status').value = status;
             
-            // Update icon preview
             previewIcon(icon || '', 'icon-demo-edit');
             
-            // Debug: log untuk memastikan data terkirim
             console.log('Edit data:', {id, nama, deskripsi, icon, status});
         }
 
@@ -476,7 +485,6 @@
             }
         }
 
-        // Close modal when clicking outside
         window.onclick = function(event) {
             const modals = document.querySelectorAll('.modal');
             modals.forEach(modal => {
@@ -486,5 +494,6 @@
             });
         }
     </script>
+    <script src="<?= base_url('assets/js/admin.js') ?>"></script>
 </body>
 </html>

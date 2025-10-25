@@ -13,16 +13,15 @@ class DokumenModel extends Model
     protected $useSoftDeletes = false;
     protected $protectFields = true;
     protected $allowedFields = [
-        'judul', 'deskripsi', 'kategori_id', 'menu_id', 'file_name', 
+        'judul', 'deskripsi', 'tags', 'kategori_id', 'menu_id', 'file_name', 
         'file_path', 'file_type', 'file_size', 'uploaded_by', 
-        'tanggal_upload', 'views', 'downloads', 'status'
-        // 'created_at', 'updated_at'  // TAMBAHKAN INI
+        'tanggal_upload', 'views', 'downloads', 'status', 'akses'
     ];
 
     protected bool $allowEmptyInserts = false;
 
-    // Dates - PERBAIKI PENGATURAN TIMESTAMP
-    protected $useTimestamps = false;  // UBAH DARI false KE true
+    // Dates
+    protected $useTimestamps = false;
     protected $dateFormat = 'datetime';
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
@@ -36,7 +35,9 @@ class DokumenModel extends Model
         'file_path' => 'required',
         'file_type' => 'required|in_list[pdf,doc,docx,xls,xlsx,ppt,pptx]',
         'file_size' => 'required|integer',
-        'tanggal_upload' => 'required|valid_date'
+        'tanggal_upload' => 'required|valid_date',
+        'status' => 'in_list[aktif,nonaktif]',
+        'akses' => 'in_list[publik,privat]'
     ];
 
     protected $validationMessages = [
@@ -51,6 +52,12 @@ class DokumenModel extends Model
         'menu_id' => [
             'required' => 'Menu harus dipilih',
             'is_not_unique' => 'Menu tidak valid'
+        ],
+        'status' => [
+            'in_list' => 'Status harus aktif atau nonaktif'
+        ],
+        'akses' => [
+            'in_list' => 'Akses harus publik atau privat'
         ]
     ];
 
@@ -59,7 +66,7 @@ class DokumenModel extends Model
 
     // Custom Methods
     
-    // PERBAIKAN: Method untuk halaman admin - tampilkan semua dokumen (aktif dan nonaktif)
+    // ADMIN: Method untuk halaman admin - tampilkan semua dokumen
     public function getAllDokumen()
     {
         return $this->db->table('dokumen d')
@@ -72,7 +79,22 @@ class DokumenModel extends Model
             ->getResultArray();
     }
     
-    // Method ini tetap ada untuk halaman publik - hanya tampilkan dokumen aktif
+    // PUBLIC: Method untuk landing page - hanya dokumen publik dan aktif
+    public function getPublicDokumen()
+    {
+        return $this->db->table('dokumen d')
+            ->select('d.*, k.nama_kategori, m.nama_menu, u.nama_lengkap as uploader')
+            ->join('kategori k', 'k.id = d.kategori_id')
+            ->join('menu m', 'm.id = d.menu_id')
+            ->join('users u', 'u.id = d.uploaded_by')
+            ->where('d.status', 'aktif')
+            ->where('d.akses', 'publik')
+            ->orderBy('d.created_at', 'DESC')
+            ->get()
+            ->getResultArray();
+    }
+    
+    // USER: Method untuk user yang sudah login - dokumen aktif (publik + privat)
     public function getActiveDokumen()
     {
         return $this->db->table('dokumen d')
@@ -86,6 +108,22 @@ class DokumenModel extends Model
             ->getResultArray();
     }
 
+    // PUBLIC: Dokumen by menu untuk public access
+    public function getPublicDokumenByMenu($menu_id)
+    {
+        return $this->db->table('dokumen d')
+            ->select('d.*, k.nama_kategori, m.nama_menu')
+            ->join('kategori k', 'k.id = d.kategori_id')
+            ->join('menu m', 'm.id = d.menu_id')
+            ->where('d.menu_id', $menu_id)
+            ->where('d.status', 'aktif')
+            ->where('d.akses', 'publik')
+            ->orderBy('d.created_at', 'DESC')
+            ->get()
+            ->getResultArray();
+    }
+
+    // USER: Dokumen by menu untuk logged in user
     public function getDokumenByMenu($menu_id)
     {
         return $this->db->table('dokumen d')
@@ -99,6 +137,7 @@ class DokumenModel extends Model
             ->getResultArray();
     }
 
+    // USER: Dokumen by kategori untuk logged in user
     public function getDokumenByKategori($kategori_id)
     {
         return $this->db->table('dokumen d')
@@ -112,6 +151,28 @@ class DokumenModel extends Model
             ->getResultArray();
     }
 
+    // PUBLIC: Search dokumen untuk public access
+    public function searchPublicDokumen($keyword)
+    {
+        return $this->db->table('dokumen d')
+            ->select('d.*, k.nama_kategori, m.nama_menu')
+            ->join('kategori k', 'k.id = d.kategori_id')
+            ->join('menu m', 'm.id = d.menu_id')
+            ->where('d.status', 'aktif')
+            ->where('d.akses', 'publik')
+            ->groupStart()
+                ->like('d.judul', $keyword)
+                ->orLike('d.deskripsi', $keyword)
+                ->orLike('d.file_name', $keyword)
+                ->orLike('k.nama_kategori', $keyword)
+                ->orLike('m.nama_menu', $keyword)
+            ->groupEnd()
+            ->orderBy('d.created_at', 'DESC')
+            ->get()
+            ->getResultArray();
+    }
+
+    // USER: Search dokumen untuk logged in user
     public function searchDokumen($keyword)
     {
         return $this->db->table('dokumen d')
@@ -131,20 +192,68 @@ class DokumenModel extends Model
             ->getResultArray();
     }
 
-    public function incrementViews($id)
+    // GANTI method incrementViews dan incrementDownloads di DokumenModel.php dengan yang ini:
+
+    public function incrementViews($id, $user_id = null, $ip_address = null)
     {
-        return $this->db->table('dokumen')
+        // Cek apakah user sudah view dalam 1 jam terakhir (prevent spam)
+        if ($user_id && $ip_address) {
+            $recentView = $this->db->table('log_activity')
+                ->where('user_id', $user_id)
+                ->where('dokumen_id', $id)
+                ->where('activity LIKE', '%view%')
+                ->where('ip_address', $ip_address)
+                ->where('created_at >=', date('Y-m-d H:i:s', strtotime('-1 hour')))
+                ->countAllResults();
+                
+            if ($recentView > 0) {
+                log_message('info', "View increment blocked - Recent view detected for user $user_id, doc $id");
+                return false; // Jangan increment jika sudah view dalam 1 jam
+            }
+        }
+        
+        // Increment view counter
+        $result = $this->db->table('dokumen')
             ->where('id', $id)
             ->set('views', 'views + 1', false)
             ->update();
+            
+        if ($result) {
+            log_message('info', "Views incremented for document ID: $id");
+        }
+        
+        return $result;
     }
 
-    public function incrementDownloads($id)
+    public function incrementDownloads($id, $user_id = null, $ip_address = null)
     {
-        return $this->db->table('dokumen')
+        // Cek apakah user sudah download dalam 5 menit terakhir (prevent spam)
+        if ($user_id && $ip_address) {
+            $recentDownload = $this->db->table('log_activity')
+                ->where('user_id', $user_id)
+                ->where('dokumen_id', $id)
+                ->where('activity LIKE', '%download%')
+                ->where('ip_address', $ip_address)
+                ->where('created_at >=', date('Y-m-d H:i:s', strtotime('-5 minutes')))
+                ->countAllResults();
+                
+            if ($recentDownload > 0) {
+                log_message('info', "Download increment blocked - Recent download detected for user $user_id, doc $id");
+                return false; // Jangan increment jika sudah download dalam 5 menit
+            }
+        }
+        
+        // Increment download counter
+        $result = $this->db->table('dokumen')
             ->where('id', $id)
             ->set('downloads', 'downloads + 1', false)
             ->update();
+            
+        if ($result) {
+            log_message('info', "Downloads incremented for document ID: $id");
+        }
+        
+        return $result;
     }
 
     public function getDokumenDetail($id)
@@ -159,25 +268,42 @@ class DokumenModel extends Model
             ->getRowArray();
     }
 
-    // UPDATED METHOD: Only show documents uploaded within last 2 weeks (14 days)
-    public function getRecentDokumen($limit = 5)
+    // Tambahkan method ini di DokumenModel.php
+    public function getPublicRecentDokumen($limit = 5)
     {
-        // Calculate the date 7 days ago from today (1 week)
-        $oneWeekAgo = date('Y-m-d H:i:s', strtotime('-7 days')); // UBAH DARI -14 days
+        $oneWeekAgo = date('Y-m-d H:i:s', strtotime('-7 days'));
         
         return $this->db->table('dokumen d')
             ->select('d.*, k.nama_kategori, m.nama_menu')
             ->join('kategori k', 'k.id = d.kategori_id')
             ->join('menu m', 'm.id = d.menu_id')
             ->where('d.status', 'aktif')
-            ->where('d.created_at >=', $oneWeekAgo) // Only documents from last 1 week
+            ->where('d.akses', 'publik')
+            ->where('d.created_at >=', $oneWeekAgo)
             ->orderBy('d.created_at', 'DESC')
             ->limit($limit)
             ->get()
             ->getResultArray();
     }
 
-    // NEW METHOD: Get all recent documents (for admin or full listing)
+    // USER: Recent documents untuk user dashboard
+    public function getRecentDokumen($limit = 5)
+    {
+        $oneWeekAgo = date('Y-m-d H:i:s', strtotime('-7 days'));
+        
+        return $this->db->table('dokumen d')
+            ->select('d.*, k.nama_kategori, m.nama_menu')
+            ->join('kategori k', 'k.id = d.kategori_id')
+            ->join('menu m', 'm.id = d.menu_id')
+            ->where('d.status', 'aktif')
+            ->where('d.created_at >=', $oneWeekAgo)
+            ->orderBy('d.created_at', 'DESC')
+            ->limit($limit)
+            ->get()
+            ->getResultArray();
+    }
+
+    // ADMIN: All recent documents (untuk admin)
     public function getAllRecentDokumen($limit = 5)
     {
         return $this->db->table('dokumen d')
@@ -191,26 +317,6 @@ class DokumenModel extends Model
             ->getResultArray();
     }
 
-    // NEW METHOD: Get documents that are older than 2 weeks (for cleanup or archiving)
-    public function getOldDokumen($limit = null)
-    {
-        $twoWeeksAgo = date('Y-m-d H:i:s', strtotime('-14 days'));
-        
-        $query = $this->db->table('dokumen d')
-            ->select('d.*, k.nama_kategori, m.nama_menu')
-            ->join('kategori k', 'k.id = d.kategori_id')
-            ->join('menu m', 'm.id = d.menu_id')
-            ->where('d.status', 'aktif')
-            ->where('d.created_at <', $twoWeeksAgo)
-            ->orderBy('d.created_at', 'DESC');
-            
-        if ($limit) {
-            $query->limit($limit);
-        }
-        
-        return $query->get()->getResultArray();
-    }
-
     public function getPopularDokumen($limit = 5)
     {
         return $this->db->table('dokumen d')
@@ -218,6 +324,7 @@ class DokumenModel extends Model
             ->join('kategori k', 'k.id = d.kategori_id')
             ->join('menu m', 'm.id = d.menu_id')
             ->where('d.status', 'aktif')
+            ->where('d.akses', 'publik') // Hanya dokumen publik untuk popular
             ->orderBy('d.views', 'DESC')
             ->limit($limit)
             ->get()
@@ -228,13 +335,23 @@ class DokumenModel extends Model
     {
         $stats = [];
         
-        // Total dokumen
+        // Total dokumen aktif
         $stats['total_dokumen'] = $this->where('status', 'aktif')->countAllResults();
         
-        // Total dokumen terbaru (2 minggu terakhir)
-        $twoWeeksAgo = date('Y-m-d H:i:s', strtotime('-7 days'));
+        // Total dokumen publik
+        $stats['total_publik'] = $this->where('status', 'aktif')
+                                      ->where('akses', 'publik')
+                                      ->countAllResults();
+                                      
+        // Total dokumen privat
+        $stats['total_privat'] = $this->where('status', 'aktif')
+                                      ->where('akses', 'privat')
+                                      ->countAllResults();
+        
+        // Total dokumen terbaru (1 minggu terakhir)
+        $oneWeekAgo = date('Y-m-d H:i:s', strtotime('-7 days'));
         $stats['recent_dokumen_count'] = $this->where('status', 'aktif')
-                                             ->where('created_at >=', $twoWeeksAgo)
+                                             ->where('created_at >=', $oneWeekAgo)
                                              ->countAllResults();
         
         // Dokumen per menu
@@ -258,10 +375,9 @@ class DokumenModel extends Model
         return $stats;
     }
 
-    // NEW METHOD: Check if document is considered "recent" (within 2 weeks)
     public function isRecentDokumen($dokumen_id)
     {
-        $twoWeeksAgo = date('Y-m-d H:i:s', strtotime('-7 days'));
+        $oneWeekAgo = date('Y-m-d H:i:s', strtotime('-7 days'));
         
         $dokumen = $this->select('created_at')
                        ->where('id', $dokumen_id)
@@ -272,16 +388,51 @@ class DokumenModel extends Model
             return false;
         }
         
-        return $dokumen['created_at'] >= $twoWeeksAgo;
+        return $dokumen['created_at'] >= $oneWeekAgo;
     }
 
-    // NEW METHOD: Get count of recent documents
     public function getRecentDokumenCount()
     {
-        $twoWeeksAgo = date('Y-m-d H:i:s', strtotime('-7 days'));
+        $oneWeekAgo = date('Y-m-d H:i:s', strtotime('-7 days'));
         
         return $this->where('status', 'aktif')
-                   ->where('created_at >=', $twoWeeksAgo)
+                   ->where('created_at >=', $oneWeekAgo)
                    ->countAllResults();
+    }
+
+    // Method untuk check akses dokumen
+    public function checkDokumenAccess($id, $isLoggedIn = false)
+    {
+        $dokumen = $this->select('status, akses')
+                       ->where('id', $id)
+                       ->first();
+                       
+        if (!$dokumen || $dokumen['status'] !== 'aktif') {
+            return false;
+        }
+        
+        // Jika dokumen publik, siapa saja bisa akses
+        if ($dokumen['akses'] === 'publik') {
+            return true;
+        }
+        
+        // Jika dokumen privat, harus login
+        return $isLoggedIn;
+    }
+
+    // Method untuk filter dokumen berdasarkan user login status
+    public function filterDokumenByAccess($dokumen, $isLoggedIn = false)
+    {
+        return array_filter($dokumen, function($doc) use ($isLoggedIn) {
+            if ($doc['status'] !== 'aktif') {
+                return false;
+            }
+            
+            if ($doc['akses'] === 'publik') {
+                return true;
+            }
+            
+            return $isLoggedIn;
+        });
     }
 }

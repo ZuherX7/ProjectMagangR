@@ -1,0 +1,4 @@
+CRITICAL - 2025-10-08 18:43:04 --> ErrorException: Cannot redeclare App\Controllers\Admin::initializeDB()
+[Method: GET, Route: admin/pengaduan/notifications]
+in APPPATH\Controllers\Admin.php on line 1534.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()

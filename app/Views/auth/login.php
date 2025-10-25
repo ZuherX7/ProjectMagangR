@@ -6,6 +6,7 @@
     <title>Login - SIDODIK</title>
     <link rel="stylesheet" href="<?= base_url('assets/css/auth.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Tambahkan ke auth.css atau di dalam <style> tag di login.php */
         body {
@@ -27,11 +28,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8); /* Overlay lebih gelap untuk menggelapkan gambar */
+            background: rgba(0, 0, 0, 0.8);
             z-index: -1;
         }
 
-        /* Update login-container tanpa overlay tambahan */
         .login-container {
             height: 100vh;
             display: flex;
@@ -42,14 +42,52 @@
         }
 
         .login-wrapper {
-            background: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 25px;
-            box-shadow: none; /* Hilangkan bayangan */
+            box-shadow: none;
             max-width: 350px;
             width: 100%;
             max-height: 95vh;
+        }
+
+        /* Back Button Styles */
+        .back-to-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 1);
+            color: #667eea;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            border-color: #667eea;
+        }
+
+        .btn-back i {
+            font-size: 16px;
         }
 
         .logo-img {
@@ -224,9 +262,38 @@
         .modal.show {
             animation: modalFadeIn 0.3s ease-out;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .back-to-home {
+                top: 10px;
+                left: 10px;
+            }
+
+            .btn-back {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .btn-back span {
+                display: none;
+            }
+
+            .btn-back i {
+                margin: 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Back to Home Button -->
+    <div class="back-to-home">
+        <a href="<?= base_url('/') ?>" class="btn-back">
+            <i class="fas fa-arrow-left"></i>
+            <span>Kembali</span>
+        </a>
+    </div>
+
     <div class="login-container">
         <div class="login-wrapper">
             <!-- Logo Section -->
@@ -402,12 +469,10 @@
             
             modal.style.display = 'block';
             
-            // Add show class for animation
             setTimeout(() => {
                 modalContent.classList.add('show');
             }, 10);
             
-            // Focus on first input
             setTimeout(() => {
                 document.getElementById('forgot-nip').focus();
             }, 100);
@@ -422,11 +487,9 @@
             setTimeout(() => {
                 modal.style.display = 'none';
                 
-                // Reset form
                 const form = modal.querySelector('form');
                 form.reset();
                 
-                // Remove any error states
                 const inputs = form.querySelectorAll('.form-control');
                 inputs.forEach(input => {
                     input.classList.remove('is-invalid');
@@ -434,14 +497,12 @@
             }, 300);
         }
 
-        // Close modal when clicking outside
         document.getElementById('forgotPasswordModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeForgotPasswordModal();
             }
         });
 
-        // Close modal with ESC key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 const modal = document.getElementById('forgotPasswordModal');
@@ -451,7 +512,6 @@
             }
         });
 
-        // Validation for password confirmation in modal
         document.getElementById('confirm-password').addEventListener('input', function() {
             const newPassword = document.getElementById('new-password').value;
             const confirmPassword = this.value;

@@ -60,4 +60,36 @@ class LogActivityModel extends Model
             ->get()
             ->getResultArray();
     }
+
+    // TAMBAHKAN METHOD INI DI LogActivityModel.php
+    public function logDocumentAccess($user_id, $activity, $dokumen_id, $user_type, $ip_address = null, $user_agent = null)
+    {
+        $data = [
+            'user_id' => $user_id,
+            'activity' => $user_type . '_' . $activity, // admin_view, user_view, public_view, admin_download, dll
+            'dokumen_id' => $dokumen_id,
+            'ip_address' => $ip_address,
+            'user_agent' => $user_agent
+        ];
+
+        return $this->insert($data);
+    }
+
+    // Method untuk analisis berdasarkan user type
+    public function getAccessAnalytics($dokumen_id = null)
+    {
+        $builder = $this->db->table('log_activity l')
+            ->select('l.activity, COUNT(*) as count')
+            ->where('l.activity LIKE', '%_view')
+            ->orWhere('l.activity LIKE', '%_download');
+            
+        if ($dokumen_id) {
+            $builder->where('l.dokumen_id', $dokumen_id);
+        }
+        
+        $builder->groupBy('l.activity')
+                ->orderBy('count', 'DESC');
+                
+        return $builder->get()->getResultArray();
+    }
 }

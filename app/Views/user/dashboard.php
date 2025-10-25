@@ -8,48 +8,17 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/user.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Add this to the existing styles */
-        .doc-file-name {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 16px;
-            color: #666;
-            background: #f8f9fa;
-            padding: 8px 16px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            width: fit-content;
-        }
-
-        /* .doc-file-name {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            color: #666;
-            background: #f8f9fa;
-            padding: 6px 12px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            width: fit-content;
-        } */
-
-        .doc-file-name i {
-            color: #667eea;
-        }
-        
-        /* Update hero-section di dashboard.php - Ganti yang lama dengan ini */
+        /* Hero Section*/
         .hero-section {
             background: url('<?= base_url("assets/img/gedung2.png") ?>') center center;
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             color: white;
-            padding: 60px 0 80px 0; /* Tambah padding bottom lebih besar */
+            padding: 80px 0 100px 0;
             position: relative;
             overflow: hidden;
-            min-height: 100vh; /* Pastikan full viewport height */
+            min-height: 85vh;
         }
 
         .hero-section::before {
@@ -59,7 +28,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.4); /* Dark overlay untuk readability */
+            background: rgba(0, 0, 0, 0.5);
             z-index: 1;
         }
 
@@ -67,45 +36,50 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 50px 0; /* Tambah padding untuk content */
+            padding: 60px 20px;
         }
-        
+
         .hero-section h1 {
             font-size: 42px;
             font-weight: 700;
-            margin-bottom: 16px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 18px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            line-height: 1.2;
+            letter-spacing: -0.5px;
         }
-        
+
         .hero-section .lead {
             font-size: 20px;
             opacity: 0.95;
-            margin-bottom: 40px;
-            line-height: 1.5;
+            margin-bottom: 45px;
+            line-height: 1.6;
+            font-weight: 400;
         }
-        
+
         .search-highlight {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            padding: 30px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(15px);
+            padding: 35px;
             border-radius: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
         }
-        
+
         .search-highlight h3 {
             font-size: 18px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             font-weight: 600;
+            letter-spacing: 0.3px;
         }
-        
+
         .hero-search-wrapper {
             position: relative;
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto;
         }
-        
+
         .hero-search-input {
             width: 100%;
             padding: 16px 60px 16px 24px;
@@ -113,9 +87,16 @@
             border-radius: 30px;
             background: white;
             font-size: 16px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transition: all 0.3s ease;
         }
-        
+
+        .hero-search-input:focus {
+            outline: none;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+            transform: translateY(-2px);
+        }
+
         .hero-search-btn {
             position: absolute;
             right: 8px;
@@ -128,110 +109,120 @@
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(74, 111, 165, 0.3);
         }
-        
+
         .hero-search-btn:hover {
             transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 6px 16px rgba(74, 111, 165, 0.4);
         }
-        
+
         .user-greeting-hero {
-            background: rgba(255,255,255,0.2);
-            padding: 10px 20px;
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
             border-radius: 25px;
             display: inline-block;
             font-size: 16px;
             font-weight: 500;
-            margin-top: 20px;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        
-        /* Enhanced Stats Section */
+
+        /* Stats Section - Cleaned & Consistent */
         .stats-section {
-            padding: 50px 0;
+            padding: 60px 0;
             background: #f8f9fa;
         }
-        
+
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 0;
         }
-        
+
         .stat-card {
             background: white;
             border-radius: 16px;
-            padding: 25px;
+            padding: 30px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             border: 1px solid rgba(0,0,0,0.05);
         }
-        
+
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
-        
+
         .stat-icon {
-            width: 60px;
-            height: 60px;
+            width: 64px;
+            height: 64px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 15px;
+            margin: 0 auto 18px;
             color: white;
-            font-size: 24px;
+            font-size: 26px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
-        
+
         .stat-number {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            line-height: 1;
         }
-        
+
         .stat-label {
             color: #7f8c8d;
             font-size: 14px;
             font-weight: 500;
+            letter-spacing: 0.3px;
         }
-        
-        /* Enhanced Menu Section */
+
+        /* Menu Section - Clean Layout */
         .menu-section {
-            padding: 50px 0;
+            padding: 60px 0;
         }
-        
+
         .section-title {
             text-align: center;
             margin-bottom: 50px;
         }
-        
+
         .section-title h2 {
             font-size: 36px;
-            font-weight: 600;
+            font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
         }
-        
+
         .section-title p {
             font-size: 18px;
             color: #7f8c8d;
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
+            line-height: 1.6;
         }
-        
+
         .menu-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             border: 1px solid rgba(0,0,0,0.05);
             position: relative;
         }
-        
+
         .menu-card::before {
             content: '';
             position: absolute;
@@ -241,21 +232,21 @@
             height: 4px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        
+
         .menu-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
         }
-        
+
         .menu-link {
             display: flex;
             align-items: center;
-            padding: 35px;
+            padding: 30px;
             text-decoration: none;
             color: inherit;
-            gap: 25px;
+            gap: 22px;
         }
-        
+
         .menu-icon {
             width: 70px;
             height: 70px;
@@ -269,7 +260,7 @@
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
             flex-shrink: 0;
         }
-        
+
         .menu-icon i {
             width: 28px;
             height: 28px;
@@ -279,39 +270,48 @@
             text-align: center;
             line-height: 1;
         }
-        
+
+        .menu-info {
+            flex: 1;
+        }
+
         .menu-info h3 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
             color: #2c3e50;
             margin-bottom: 8px;
+            line-height: 1.3;
         }
-        
+
         .doc-count {
             color: #667eea;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
-        
-        /* Enhanced Documents Section */
+
+        .doc-count i {
+            font-size: 14px;
+        }
+
+        /* Documents Section - Consistent Styling */
         .documents-section {
-            padding: 50px 0;
+            padding: 60px 0;
             background: #f8f9fa;
         }
-        
+
         .document-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             border: 1px solid rgba(0,0,0,0.05);
             position: relative;
         }
-        
+
         .document-card::before {
             content: '';
             position: absolute;
@@ -321,16 +321,71 @@
             height: 4px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        
+
         .document-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
         }
-        
-        /* Responsive Design */
+
+        /* Doc File Name - Clean Design */
+        .doc-file-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #7f8c8d;
+            background: #f8f9fa;
+            padding: 8px 14px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        .doc-file-name i {
+            color: #667eea;
+            font-size: 14px;
+        }
+
+        /* Tags - Consistent Style */
+        .doc-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .tag-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .tag-pill:hover {
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .tag-pill i {
+            font-size: 9px;
+        }
+
+        /* Responsive - Clean Breakpoints */
         @media (max-width: 768px) {
             .hero-section {
-                padding: 40px 0;
+                padding: 50px 0 70px;
+                min-height: auto;
             }
             
             .hero-section h1 {
@@ -342,7 +397,7 @@
             }
             
             .search-highlight {
-                padding: 20px;
+                padding: 25px;
             }
             
             .stats-grid {
@@ -353,45 +408,87 @@
             .section-title h2 {
                 font-size: 28px;
             }
-        }
-        
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
             
+            .section-title p {
+                font-size: 16px;
+            }
+
             .menu-link {
-                padding: 25px;
-                gap: 20px;
+                padding: 24px;
             }
-            
+
             .menu-icon {
                 width: 60px;
                 height: 60px;
                 font-size: 24px;
             }
+
+            .menu-info h3 {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 40px 15px;
+            }
+            
+            .hero-section h1 {
+                font-size: 28px;
+            }
+
+            .hero-section .lead {
+                font-size: 16px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-link {
+                padding: 20px;
+                gap: 16px;
+            }
+            
+            .menu-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 22px;
+            }
+
+            .menu-info h3 {
+                font-size: 16px;
+            }
+
+            .stat-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 22px;
+            }
+
+            .stat-number {
+                font-size: 30px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Top Navigation -->
-    <nav class="top-navbar">
-        <div class="container">
-            <div class="navbar-content">
-                <div class="navbar-left">
-                    <div class="logo-section">
-                        <img src="<?= base_url('assets/img/kbb.png') ?>" alt="Logo" class="navbar-logo">
-                        <span class="app-name">SIDODIK</span>
-                    </div>
-                </div>
-                
-                <div class="navbar-right">
-                    <div class="nav-links">
-                        <a href="<?= base_url('user/dokumen') ?>" class="nav-link">Semua Dokumen</a>
-                        <span class="user-greeting">Selamat datang, <strong><?= esc($user['nama_lengkap']) ?></strong></span>
-                        <a href="<?= base_url('auth/logout') ?>" class="logout-btn">Logout</a>
-                    </div>
-                </div>
+    <!-- Top Navigation - Same structure as landing page -->
+    <nav class="navbar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <a href="<?= base_url('/') ?>" class="navbar-brand" style="display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 700; color: white; text-decoration: none;">
+                <img src="<?= base_url('assets/img/kbb.png') ?>" alt="Logo KBB" style="width: 40px; height: 40px; object-fit: contain;">
+                SIDODIK
+            </a>
+            <ul class="navbar-nav" style="display: flex; list-style: none; gap: 25px; align-items: center; margin: 0; padding: 0;">
+                <li><a href="<?= base_url('/') ?>" style="color: white; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='transparent'">Beranda</a></li>
+                <li><a href="<?= base_url('user/dokumen') ?>" style="color: white; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='transparent'">Dokumen</a></li>
+                <li><a href="<?= base_url('/#pengaduan') ?>" style="color: white; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='transparent'">Pengaduan</a></li>
+                <li><a href="<?= base_url('user/dashboard') ?>" style="color: white; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='transparent'">Dashboard User</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="color: white; font-size: 14px;">Selamat datang, <strong><?= esc($user['nama_lengkap']) ?></strong></span>
+                <a href="<?= base_url('auth/logout') ?>" style="background: #dc3545; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 500; font-size: 14px; transition: all 0.3s ease;" onmouseover="this.style.background='#c82333'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#dc3545'; this.style.transform='translateY(0)'">Logout</a>
             </div>
         </div>
     </nav>
@@ -454,7 +551,7 @@
                             <i class="fas fa-layer-group"></i>
                         </div>
                         <div class="stat-number"><?= count($kategori) ?></div>
-                        <div class="stat-label">Kategori Tersedia</div>
+                        <div class="stat-label">Total Kategori</div>
                     </div>
                     
                     <!-- Total Users -->
@@ -600,6 +697,19 @@
                                         <?= esc(substr($doc['deskripsi'] ?? '', 0, 100)) ?>
                                         <?= strlen($doc['deskripsi'] ?? '') > 100 ? '...' : '' ?>
                                     </p>
+                                    <?php if (!empty($doc['tags'])): ?>
+                                        <div class="doc-tags">
+                                            <?php 
+                                            $tags = array_filter(array_map('trim', explode(',', $doc['tags'])));
+                                            foreach ($tags as $tag): 
+                                            ?>
+                                                <a href="<?= base_url('/dokumen-publik?q=' . urlencode($tag)) ?>" class="tag-pill">
+                                                    <i class="fas fa-tag"></i>
+                                                    <?= esc($tag) ?>
+                                                </a>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
                                     <div class="doc-meta">
                                         <span class="doc-menu">
                                             <i class="fas fa-bars"></i>
@@ -641,7 +751,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>Layanan digital untuk pengelolaan data dan informasi yang mendukung transformasi digital instansi pemerintah, khususnya Kominfo, secara cepat, aman, dan terintegrasi.</h4>
+                    <h4>Sistem Informasi Dokumen Diskominfotik Kabupaten Bandung Barat. Menyediakan akses mudah dan transparan untuk semua dokumen resmi pemerintahan dengan standar keamanan tinggi.</h4>
                 </div>
                 
                 <div class="footer-links">
