@@ -202,3 +202,12 @@ app.sessionRegenerateDestroy = false
 1. **File Storage:** Files disimpan di `writable/uploads/` - pastikan backup rutin
 2. **Browser Compatibility:** Optimized untuk Chrome, Firefox, Safari (latest versions)
 3. **PDF Preview:** Beberapa PDF dengan encoding khusus mungkin tidak bisa preview langsung
+
+## 📄 License
+
+Project ini dikembangkan sebagai bagian dari program magang akademik semester 7 di Diskominfotik Kabupaten Bandung Barat. Kode sumber tersedia untuk keperluan pembelajaran dan pengembangan lebih lanjut oleh instansi terkait.
+
+---
+
+**SIDODIK** - Digitalisasi Dokumen untuk Pemerintahan Modern
+*Dikembangkan selama program magang akademik di Diskominfotik KBB*
