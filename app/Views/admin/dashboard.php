@@ -823,7 +823,7 @@
                     <li class="nav-item">
                         <a href="<?= base_url('admin/pengaduan') ?>" class="nav-link">
                             <i class="fas fa-headset"></i>
-                            <span>Kelola Pengaduan</span>
+                            <span>Kelola Permohonan Dokumen</span>
                         </a>
                     </li>
                 </ul>
@@ -941,7 +941,7 @@
                         </div>
                         <div class="overview-content">
                             <h3><?= number_format($overview_stats['pengaduan_pending']) ?></h3>
-                            <p>Pengaduan Pending</p>
+                            <p>Permohonan Pending</p>
                         </div>
                     </div>
 
@@ -952,7 +952,7 @@
                         </div>
                         <div class="overview-content">
                             <h3><?= number_format($overview_stats['total_pengaduan']) ?></h3>
-                            <p>Total Pengaduan</p>
+                            <p>Total Permohonan</p>
                         </div>
                     </div>
 
@@ -1051,7 +1051,7 @@
                     <div class="section-header">
                         <h2 class="section-title">
                             <i class="fas fa-headset"></i>
-                            Analisis Pengaduan Dokumen
+                            Analisis Permohonan Dokumen
                         </h2>
                     </div>
 
@@ -1104,7 +1104,7 @@
                         <div class="chart-container">
                             <h3 class="chart-title">
                                 <i class="fas fa-headset"></i>
-                                Status Pengaduan
+                                Status Permohonan Dokumen
                             </h3>
                             <div class="chart-canvas">
                                 <canvas id="pengaduanStatusChart"></canvas>
@@ -1115,7 +1115,7 @@
                         <div class="chart-container">
                             <h3 class="chart-title">
                                 <i class="fas fa-chart-bar"></i>
-                                Pengaduan Berdasarkan Kategori
+                                Permohonan Berdasarkan Kategori
                             </h3>
                             <div class="chart-canvas">
                                 <canvas id="pengaduanKategoriChart"></canvas>
@@ -1126,7 +1126,7 @@
                         <div class="chart-container">
                             <h3 class="chart-title">
                                 <i class="fas fa-users"></i>
-                                Pengaduan Berdasarkan Jenis Pemohon
+                                Permohonan Berdasarkan Jenis Pemohon
                             </h3>
                             <div class="chart-canvas">
                                 <canvas id="pengaduanJenisPemohonChart"></canvas>
@@ -1148,7 +1148,7 @@
                         <div class="chart-container" style="grid-column: 1 / -1;">
                             <h3 class="chart-title">
                                 <i class="fas fa-chart-line"></i>
-                                Tren Pengaduan 6 Bulan Terakhir
+                                Tren Permohonan 6 Bulan Terakhir
                             </h3>
                             <div class="chart-canvas">
                                 <canvas id="pengaduanTrendChart"></canvas>
@@ -1282,7 +1282,7 @@
                                 <?php else: ?>
                                     <tr>
                                         <td colspan="5" style="text-align: center; color: #888; padding: 40px;">
-                                            Belum ada data pengaduan
+                                            Belum ada data Permohonan Dokumen.
                                         </td>
                                     </tr>
                                 <?php endif; ?>

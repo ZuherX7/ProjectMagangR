@@ -1,0 +1,917 @@
+ERROR - 2025-11-18 08:28:43 --> mysqli_sql_exception: Column 'deskripsi' in where clause is ambiguous in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `menu`.*...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `menu`.*...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `menu`.*...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `menu`.*...', Array, false)
+#4 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(706): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->menu()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+CRITICAL - 2025-11-18 08:28:43 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'deskripsi' in where clause is ambiguous
+[Method: GET, Route: admin/menu]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE :nama_menu: ESCAPE \'!\'
+OR  `deskripsi` LIKE :deskripsi: ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC', [...], false)
+ 2 APPPATH\Controllers\Admin.php(706): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->menu()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+CRITICAL - 2025-11-18 08:28:43 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'deskripsi' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%contoh%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%contoh%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%contoh%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%contoh%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE :nama_menu: ESCAPE \'!\'
+OR  `deskripsi` LIKE :deskripsi: ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC', [...], false)
+ 4 APPPATH\Controllers\Admin.php(706): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->menu()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+CRITICAL - 2025-11-18 08:28:43 --> [Caused by] mysqli_sql_exception: Column 'deskripsi' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%contoh%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%contoh%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%contoh%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%contoh%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%contoh%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%contoh%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE :nama_menu: ESCAPE \'!\'
+OR  `deskripsi` LIKE :deskripsi: ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC', [...], false)
+ 5 APPPATH\Controllers\Admin.php(706): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->menu()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 08:28:59 --> mysqli_sql_exception: Column 'deskripsi' in where clause is ambiguous in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `menu`.*...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `menu`.*...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `menu`.*...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `menu`.*...', Array, false)
+#4 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(706): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->menu()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+CRITICAL - 2025-11-18 08:28:59 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'deskripsi' in where clause is ambiguous
+[Method: GET, Route: admin/menu]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE :nama_menu: ESCAPE \'!\'
+OR  `deskripsi` LIKE :deskripsi: ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC', [...], false)
+ 2 APPPATH\Controllers\Admin.php(706): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->menu()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+CRITICAL - 2025-11-18 08:28:59 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'deskripsi' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%form%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%form%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%form%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%form%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE :nama_menu: ESCAPE \'!\'
+OR  `deskripsi` LIKE :deskripsi: ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC', [...], false)
+ 4 APPPATH\Controllers\Admin.php(706): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->menu()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+CRITICAL - 2025-11-18 08:28:59 --> [Caused by] mysqli_sql_exception: Column 'deskripsi' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%form%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%form%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%form%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%form%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%form%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%form%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE :nama_menu: ESCAPE \'!\'
+OR  `deskripsi` LIKE :deskripsi: ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC', [...], false)
+ 5 APPPATH\Controllers\Admin.php(706): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->menu()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 08:29:16 --> mysqli_sql_exception: Column 'deskripsi' in where clause is ambiguous in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `menu`.*...', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `menu`.*...')
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `menu`.*...')
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `menu`.*...', Array, false)
+#4 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(706): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->menu()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+CRITICAL - 2025-11-18 08:29:16 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'deskripsi' in where clause is ambiguous
+[Method: GET, Route: admin/menu]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE :nama_menu: ESCAPE \'!\'
+OR  `deskripsi` LIKE :deskripsi: ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC', [...], false)
+ 2 APPPATH\Controllers\Admin.php(706): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->menu()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+CRITICAL - 2025-11-18 08:29:16 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'deskripsi' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%form%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%form%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%form%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%form%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE :nama_menu: ESCAPE \'!\'
+OR  `deskripsi` LIKE :deskripsi: ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC', [...], false)
+ 4 APPPATH\Controllers\Admin.php(706): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->menu()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+CRITICAL - 2025-11-18 08:29:16 --> [Caused by] mysqli_sql_exception: Column 'deskripsi' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%form%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%form%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%form%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%form%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE \'%form%\' ESCAPE \'!\'
+OR  `deskripsi` LIKE \'%form%\' ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `menu`.*, COUNT(dokumen.id) as jumlah_dokumen
+FROM `menu`
+LEFT JOIN `dokumen` ON `dokumen`.`menu_id` = `menu`.`id`
+WHERE   (
+`nama_menu` LIKE :nama_menu: ESCAPE \'!\'
+OR  `deskripsi` LIKE :deskripsi: ESCAPE \'!\'
+ )
+GROUP BY `menu`.`id`
+ORDER BY `menu`.`nama_menu` ASC', [...], false)
+ 5 APPPATH\Controllers\Admin.php(706): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->menu()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 10:09:44 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'sidodik', 3306, '', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `pengadu...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#6 C:\xampp\htdocs\sidodik\app\Models\PengaduanModel.php(207): CodeIgniter\BaseModel->first()
+#7 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1754): App\Models\PengaduanModel->getPengaduanDetail('3')
+#8 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->detailPengaduan('3')
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `pengadu...', Array, false)
+#3 C:\xampp\htdocs\sidodik\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\sidodik\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#5 C:\xampp\htdocs\sidodik\app\Models\PengaduanModel.php(207): CodeIgniter\BaseModel->first()
+#6 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1754): App\Models\PengaduanModel->getPengaduanDetail('3')
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->detailPengaduan('3')
+#8 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2025-11-18 10:09:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: admin/pengaduan/detail/3]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `pengaduan_dokumen`.*, `dokumen`.`judul` as `dokumen_judul`, `dokumen`.`file_path`
+FROM `pengaduan_dokumen`
+LEFT JOIN `dokumen` ON `dokumen`.`id` = `pengaduan_dokumen`.`dokumen_terkait`
+WHERE `pengaduan_dokumen`.`id` = :pengaduan_dokumen.id:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(715): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Models\PengaduanModel.php(207): CodeIgniter\BaseModel->first()
+ 6 APPPATH\Controllers\Admin.php(1754): App\Models\PengaduanModel->getPengaduanDetail('3')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->detailPengaduan('3')
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 10:09:48 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'sidodik', 3306, '', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `pengadu...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#6 C:\xampp\htdocs\sidodik\app\Models\PengaduanModel.php(207): CodeIgniter\BaseModel->first()
+#7 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1754): App\Models\PengaduanModel->getPengaduanDetail('3')
+#8 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->detailPengaduan('3')
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `pengadu...', Array, false)
+#3 C:\xampp\htdocs\sidodik\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\sidodik\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#5 C:\xampp\htdocs\sidodik\app\Models\PengaduanModel.php(207): CodeIgniter\BaseModel->first()
+#6 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1754): App\Models\PengaduanModel->getPengaduanDetail('3')
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->detailPengaduan('3')
+#8 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2025-11-18 10:09:48 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: admin/pengaduan/detail/3]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `pengaduan_dokumen`.*, `dokumen`.`judul` as `dokumen_judul`, `dokumen`.`file_path`
+FROM `pengaduan_dokumen`
+LEFT JOIN `dokumen` ON `dokumen`.`id` = `pengaduan_dokumen`.`dokumen_terkait`
+WHERE `pengaduan_dokumen`.`id` = :pengaduan_dokumen.id:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(715): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Models\PengaduanModel.php(207): CodeIgniter\BaseModel->first()
+ 6 APPPATH\Controllers\Admin.php(1754): App\Models\PengaduanModel->getPengaduanDetail('3')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->detailPengaduan('3')
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 10:09:52 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'sidodik', 3306, '', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1570): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->pengaduan()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1570): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->pengaduan()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2025-11-18 10:09:52 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: admin/pengaduan]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `pengaduan_dokumen`
+ORDER BY `created_at` DESC', [], false)
+ 3 APPPATH\Controllers\Admin.php(1570): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->pengaduan()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 10:09:56 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'sidodik', 3306, '', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `pengadu...', Array, false)
+#4 C:\xampp\htdocs\sidodik\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#6 C:\xampp\htdocs\sidodik\app\Models\PengaduanModel.php(207): CodeIgniter\BaseModel->first()
+#7 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1754): App\Models\PengaduanModel->getPengaduanDetail('3')
+#8 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->detailPengaduan('3')
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#10 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `pengadu...', Array, false)
+#3 C:\xampp\htdocs\sidodik\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\sidodik\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#5 C:\xampp\htdocs\sidodik\app\Models\PengaduanModel.php(207): CodeIgniter\BaseModel->first()
+#6 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1754): App\Models\PengaduanModel->getPengaduanDetail('3')
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->detailPengaduan('3')
+#8 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#9 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2025-11-18 10:09:56 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: admin/pengaduan/detail/3]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `pengaduan_dokumen`.*, `dokumen`.`judul` as `dokumen_judul`, `dokumen`.`file_path`
+FROM `pengaduan_dokumen`
+LEFT JOIN `dokumen` ON `dokumen`.`id` = `pengaduan_dokumen`.`dokumen_terkait`
+WHERE `pengaduan_dokumen`.`id` = :pengaduan_dokumen.id:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(715): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Models\PengaduanModel.php(207): CodeIgniter\BaseModel->first()
+ 6 APPPATH\Controllers\Admin.php(1754): App\Models\PengaduanModel->getPengaduanDetail('3')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->detailPengaduan('3')
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 10:10:21 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'sidodik', 3306, '', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1570): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->pengaduan()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1570): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->pengaduan()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2025-11-18 10:10:21 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: admin/pengaduan]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `pengaduan_dokumen`
+ORDER BY `created_at` DESC', [], false)
+ 3 APPPATH\Controllers\Admin.php(1570): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->pengaduan()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 10:10:29 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'sidodik', 3306, '', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1570): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->pengaduan()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1570): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->pengaduan()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2025-11-18 10:10:29 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: admin/pengaduan]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `pengaduan_dokumen`
+ORDER BY `created_at` DESC', [], false)
+ 3 APPPATH\Controllers\Admin.php(1570): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->pengaduan()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 10:10:33 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'sidodik', 3306, '', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1570): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->pengaduan()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xampp\htdocs\sidodik\app\Controllers\Admin.php(1570): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Admin->pengaduan()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2025-11-18 10:10:33 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: admin/pengaduan]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `pengaduan_dokumen`
+ORDER BY `created_at` DESC', [], false)
+ 3 APPPATH\Controllers\Admin.php(1570): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->pengaduan()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 10:10:37 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'sidodik', 3306, '', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `m`.*, C...', Array, false)
+#4 C:\xampp\htdocs\sidodik\app\Models\MenuModel.php(82): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\app\Controllers\Landing.php(29): App\Models\MenuModel->getActiveMenuWithCount()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Landing->index()
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Landing))
+#8 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `m`.*, C...', Array, false)
+#3 C:\xampp\htdocs\sidodik\app\Models\MenuModel.php(82): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\sidodik\app\Controllers\Landing.php(29): App\Models\MenuModel->getActiveMenuWithCount()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Landing->index()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Landing))
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+CRITICAL - 2025-11-18 10:10:37 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `m`.*, COUNT(d.id) as jumlah_dokumen
+FROM `menu` `m`
+LEFT JOIN `dokumen` `d` ON `d`.`menu_id` = `m`.`id` AND `d`.`status` = "aktif"
+WHERE `m`.`status` = :m.status:
+GROUP BY `m`.`id`
+ORDER BY `m`.`nama_menu` ASC', [...], false)
+ 3 APPPATH\Models\MenuModel.php(82): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH\Controllers\Landing.php(29): App\Models\MenuModel->getActiveMenuWithCount()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Landing->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Landing))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 10:11:24 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'sidodik', 3306, '', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `m`.*, C...', Array, false)
+#4 C:\xampp\htdocs\sidodik\app\Models\MenuModel.php(82): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\app\Controllers\Landing.php(29): App\Models\MenuModel->getActiveMenuWithCount()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Landing->index()
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Landing))
+#8 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `m`.*, C...', Array, false)
+#3 C:\xampp\htdocs\sidodik\app\Models\MenuModel.php(82): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\sidodik\app\Controllers\Landing.php(29): App\Models\MenuModel->getActiveMenuWithCount()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Landing->index()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Landing))
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+CRITICAL - 2025-11-18 10:11:24 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `m`.*, COUNT(d.id) as jumlah_dokumen
+FROM `menu` `m`
+LEFT JOIN `dokumen` `d` ON `d`.`menu_id` = `m`.`id` AND `d`.`status` = "aktif"
+WHERE `m`.`status` = :m.status:
+GROUP BY `m`.`id`
+ORDER BY `m`.`nama_menu` ASC', [...], false)
+ 3 APPPATH\Models\MenuModel.php(82): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH\Controllers\Landing.php(29): App\Models\MenuModel->getActiveMenuWithCount()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Landing->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Landing))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 23:50:03 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'sidodik', 3306, '', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `m`.*, C...', Array, false)
+#4 C:\xampp\htdocs\sidodik\app\Models\MenuModel.php(82): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\app\Controllers\Landing.php(29): App\Models\MenuModel->getActiveMenuWithCount()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Landing->index()
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Landing))
+#8 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `m`.*, C...', Array, false)
+#3 C:\xampp\htdocs\sidodik\app\Models\MenuModel.php(82): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\sidodik\app\Controllers\Landing.php(29): App\Models\MenuModel->getActiveMenuWithCount()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Landing->index()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Landing))
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+CRITICAL - 2025-11-18 23:50:03 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `m`.*, COUNT(d.id) as jumlah_dokumen
+FROM `menu` `m`
+LEFT JOIN `dokumen` `d` ON `d`.`menu_id` = `m`.`id` AND `d`.`status` = "aktif"
+WHERE `m`.`status` = :m.status:
+GROUP BY `m`.`id`
+ORDER BY `m`.`nama_menu` ASC', [...], false)
+ 3 APPPATH\Models\MenuModel.php(82): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH\Controllers\Landing.php(29): App\Models\MenuModel->getActiveMenuWithCount()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Landing->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Landing))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')
+ERROR - 2025-11-18 23:50:07 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'sidodik', 3306, '', 0)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `m`.*, C...', Array, false)
+#4 C:\xampp\htdocs\sidodik\app\Models\MenuModel.php(82): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\sidodik\app\Controllers\Landing.php(29): App\Models\MenuModel->getActiveMenuWithCount()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Landing->index()
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Landing))
+#8 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\xampp\htdocs\sidodik\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\sidodik\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\sidodik\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `m`.*, C...', Array, false)
+#3 C:\xampp\htdocs\sidodik\app\Models\MenuModel.php(82): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\sidodik\app\Controllers\Landing.php(29): App\Models\MenuModel->getActiveMenuWithCount()
+#5 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(933): App\Controllers\Landing->index()
+#6 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Landing))
+#7 C:\xampp\htdocs\sidodik\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\sidodik\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\sidodik\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\sidodik\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\sidodik\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+CRITICAL - 2025-11-18 23:50:07 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `m`.*, COUNT(d.id) as jumlah_dokumen
+FROM `menu` `m`
+LEFT JOIN `dokumen` `d` ON `d`.`menu_id` = `m`.`id` AND `d`.`status` = "aktif"
+WHERE `m`.`status` = :m.status:
+GROUP BY `m`.`id`
+ORDER BY `m`.`nama_menu` ASC', [...], false)
+ 3 APPPATH\Models\MenuModel.php(82): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH\Controllers\Landing.php(29): App\Models\MenuModel->getActiveMenuWithCount()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Landing->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Landing))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\sidodik\\public\\index.php')

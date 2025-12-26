@@ -730,7 +730,7 @@ helper('search'); // Load search helper jika ada
             <ul class="navbar-nav">
                 <li><a href="<?= base_url('/') ?>">Beranda</a></li>
                 <li><a href="<?= base_url('/dokumen-publik') ?>" class="active">Dokumen</a></li>
-                <li><a href="<?= base_url('/#pengaduan') ?>">Pengaduan</a></li>
+                <li><a href="<?= base_url('/#pengaduan') ?>">Permohonan Dokumen</a></li>
                 <!-- TOMBOL DASHBOARD USER - SELALU TAMPIL -->
                 <li><a href="<?= base_url('user/dashboard') ?>">Dashboard User</a></li>
             </ul>
@@ -1160,7 +1160,7 @@ helper('search'); // Load search helper jika ada
                         <ul>
                             <li><a href="<?= base_url('/') ?>">Beranda</a></li>
                             <li><a href="<?= base_url('/dokumen-publik') ?>">Dokumen Publik</a></li>
-                            <li><a href="<?= base_url('/#pengaduan') ?>">Pengaduan Dokumen</a></li>
+                            <li><a href="<?= base_url('/#pengaduan') ?>">Permohonan Dokumen</a></li>
                             <li><a href="<?= base_url('/about') ?>">Tentang Kami</a></li>
                         </ul>
                     </div>

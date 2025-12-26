@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelola Pengaduan - SIDODIK</title>
+    <title>Kelola Permohonan Dokumen - SIDODIK</title>
     <link rel="stylesheet" href="<?= base_url('assets/css/admin.css') ?>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Stats Cards */
+        /* Stats Cards - UPDATE */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
             margin-bottom: 30px;
         }
 
         .stat-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 25px 20px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
             transition: all 0.3s ease;
         }
 
         .stat-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .stat-icon {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 15px;
-            font-size: 22px;
+            font-size: 24px;
             color: white;
         }
 
@@ -50,10 +50,11 @@
         .stat-urgent { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
 
         .stat-number {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            line-height: 1;
         }
 
         .stat-label {
@@ -62,19 +63,20 @@
             font-weight: 500;
         }
 
-        /* Filter Section */
+        /* Filter Section - UPDATE */
         .filter-section {
             background: white;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 25px;
             margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
         }
 
         .filter-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            gap: 15px;
             align-items: end;
         }
 
@@ -180,6 +182,14 @@
             text-align: left;
             border-bottom: 1px solid #eee;
             vertical-align: middle;
+        }
+
+        /* Tambahkan style ini */
+        .table th:first-child,
+        .table td:first-child {
+            min-width: 180px;
+            width: 180px;
+            text-align: left !important;
         }
 
         .table th {
@@ -409,6 +419,25 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
         }
+
+        /* Pengaduan Table Column Widths */
+        .table th:nth-child(1) { width: 180px; min-width: 180px; }  /* Tiket & Pemohon */
+        .table th:nth-child(2) { width: 180px; }  /* Dokumen Diminta */
+        .table th:nth-child(3) { width: 110px; }  /* Kategori */
+        .table th:nth-child(4) { width: 130px; }   /* Jenis Pemohon - UBAH INI */
+        .table th:nth-child(5) { width: 110px; }  /* Urgensi */
+        .table th:nth-child(6) { width: 130px; }  /* Status */
+        .table th:nth-child(7) { width: 100px; }  /* Tanggal */
+        .table th:nth-child(8) { width: 100px; }  /* Aksi */
+
+        .table td:nth-child(1) { width: 180px; min-width: 180px; }
+        .table td:nth-child(2) { width: 200px; }
+        .table td:nth-child(3) { width: 100px; }
+        .table td:nth-child(4) { width: 130px; }   /* Jenis Pemohon - UBAH INI */
+        .table td:nth-child(5) { width: 110px; }
+        .table td:nth-child(6) { width: 100px; }
+        .table td:nth-child(7) { width: 100px; }
+        .table td:nth-child(8) { width: 130px; }
     </style>
 </head>
 <body>
@@ -461,7 +490,7 @@
                     <li class="nav-item active">
                         <a href="<?= base_url('admin/pengaduan') ?>" class="nav-link">
                             <i class="fas fa-headset"></i>
-                            <span>Kelola Pengaduan</span>
+                            <span>Kelola Permohonan Dokumen</span>
                         </a>
                     </li>
 
@@ -482,12 +511,12 @@
             <header class="content-header">
                 <div class="header-left">
                     <div class="header-info">
-                        <h1>Kelola Pengaduan Dokumen</h1>
-                        <p>Kelola permintaan dokumen dari masyarakat</p>
+                        <h1>Kelola Permohonan Dokumen</h1>
+                        <p>Kelola permohonan dokumen dari masyarakat</p>
                     </div>
                 </div>
                 <div class="header-right">
-                    <span class="breadcrumb">Admin / Pengaduan</span>
+                    <span class="breadcrumb">Admin / Permohonan Dokumen</span>
                 </div>
             </header>
 
@@ -624,7 +653,7 @@
                     <div class="section-header">
                         <h3 class="section-title">
                             <i class="fas fa-headset"></i>
-                            Daftar Pengaduan
+                            Daftar Permohonan Dokumen
                         </h3>
                         <div class="section-actions">
                             <span class="text-muted">Total: <?= count($pengaduan) ?> pengaduan</span>
@@ -753,25 +782,25 @@
                     <?php else: ?>
                         <div class="empty-state">
                             <i class="fas fa-inbox"></i>
-                            <h3>Belum Ada Pengaduan</h3>
-                            <p>Pengaduan dari masyarakat akan muncul di sini</p>
+                            <h3>Belum Ada Permohonan Dokumen</h3>
+                            <p>Permohonan Dokumen dari masyarakat akan muncul di sini</p>
                         </div>
                     <?php endif; ?>
                 </div>
 
-                <!-- Rekap Laporan Section -->
+<!-- Rekap Laporan Section -->
                 <div class="pengaduan-section" style="margin-top: 30px;">
                     <div class="section-header">
                         <h3 class="section-title">
                             <i class="fas fa-chart-bar"></i>
-                            Rekap Laporan Pengaduan
+                            Rekap Laporan Permohonan Dokumen
                         </h3>
                     </div>
 
                     <!-- Filter Rekap -->
-                    <div class="filter-section" style="margin-bottom: 25px;">
+                    <div style="background: #f8f9fa; border-radius: 12px; padding: 25px; margin-bottom: 25px;">
                         <form id="rekapForm" method="GET" action="<?= base_url('admin/pengaduan/rekap') ?>">
-                            <div class="filter-row">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; align-items: end;">
                                 <div class="form-group">
                                     <label class="form-label">Periode</label>
                                     <select name="periode" id="periodePicker" class="form-control" onchange="toggleCustomDate()">
@@ -793,8 +822,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-label">&nbsp;</label>
-                                    <button type="button" class="btn btn-primary" onclick="showRekap()">
+                                    <button type="button" class="btn btn-primary" onclick="showRekap()" style="width: 100%;">
                                         <i class="fas fa-search"></i>
                                         Lihat Rekap
                                     </button>
@@ -806,21 +834,21 @@
                     <!-- Rekap Results (Hidden by default) -->
                     <div id="rekapResults" style="display: none;">
                         <!-- Loading State -->
-                        <div id="rekapLoading" style="text-align: center; padding: 40px;">
-                            <div class="loading-spinner" style="display: inline-block; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                            <p style="margin-top: 15px; color: #5a6c7d;">Memuat rekap data...</p>
+                        <div id="rekapLoading" style="text-align: center; padding: 60px 20px; background: #f8f9fa; border-radius: 12px;">
+                            <div class="loading-spinner" style="display: inline-block; width: 50px; height: 50px; border: 5px solid #e9ecef; border-top: 5px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                            <p style="margin-top: 20px; color: #5a6c7d; font-size: 15px; font-weight: 500;">Memuat rekap data...</p>
                         </div>
 
                         <!-- Rekap Content -->
                         <div id="rekapContent" style="display: none;">
                             <!-- Summary Cards -->
-                            <div class="stats-grid" style="margin-bottom: 25px;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 30px;">
                                 <div class="stat-card">
                                     <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
                                         <i class="fas fa-list"></i>
                                     </div>
                                     <div class="stat-number" id="rekapTotal">0</div>
-                                    <div class="stat-label">Total Pengaduan</div>
+                                    <div class="stat-label">Total Permohonan</div>
                                 </div>
 
                                 <div class="stat-card">
@@ -857,53 +885,53 @@
                             </div>
 
                             <!-- Detail Tables -->
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 25px;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 25px;">
                                 <!-- By Kategori -->
-                                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
-                                    <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 15px; color: #2c3e50;">
-                                        <i class="fas fa-tags"></i> Per Kategori
+                                <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #e9ecef;">
+                                    <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 20px; color: #2c3e50; display: flex; align-items: center; gap: 8px; padding-bottom: 12px; border-bottom: 2px solid #667eea;">
+                                        <i class="fas fa-tags" style="color: #667eea;"></i> Per Kategori
                                     </h4>
-                                    <div id="rekapKategori"></div>
+                                    <div id="rekapKategori" style="min-height: 100px;"></div>
                                 </div>
 
                                 <!-- By Jenis Pemohon -->
-                                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
-                                    <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 15px; color: #2c3e50;">
-                                        <i class="fas fa-users"></i> Per Jenis Pemohon
+                                <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #e9ecef;">
+                                    <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 20px; color: #2c3e50; display: flex; align-items: center; gap: 8px; padding-bottom: 12px; border-bottom: 2px solid #3498db;">
+                                        <i class="fas fa-users" style="color: #3498db;"></i> Per Jenis Pemohon
                                     </h4>
-                                    <div id="rekapJenis"></div>
+                                    <div id="rekapJenis" style="min-height: 100px;"></div>
                                 </div>
 
                                 <!-- By Urgency -->
-                                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
-                                    <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 15px; color: #2c3e50;">
-                                        <i class="fas fa-exclamation-triangle"></i> Per Urgensi
+                                <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #e9ecef;">
+                                    <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 20px; color: #2c3e50; display: flex; align-items: center; gap: 8px; padding-bottom: 12px; border-bottom: 2px solid #e74c3c;">
+                                        <i class="fas fa-exclamation-triangle" style="color: #e74c3c;"></i> Per Urgensi
                                     </h4>
-                                    <div id="rekapUrgency"></div>
+                                    <div id="rekapUrgency" style="min-height: 100px;"></div>
                                 </div>
                             </div>
 
                             <!-- Response Time -->
-                            <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin-bottom: 25px; text-align: center;">
-                                <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 10px; color: #1976d2;">
+                            <div style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 30px; border-radius: 12px; margin-bottom: 25px; text-align: center; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);">
+                                <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 15px; color: white; opacity: 0.9;">
                                     <i class="fas fa-clock"></i> Rata-rata Waktu Respon
                                 </h4>
-                                <div style="font-size: 36px; font-weight: 700; color: #1976d2;">
-                                    <span id="rekapAvgResponse">0</span> <span style="font-size: 18px;">hari</span>
+                                <div style="font-size: 48px; font-weight: 700; color: white; line-height: 1.2;">
+                                    <span id="rekapAvgResponse">0</span> <span style="font-size: 20px; opacity: 0.9;">hari</span>
                                 </div>
                             </div>
 
                             <!-- Export Buttons -->
-                            <div style="text-align: center; padding: 20px; border-top: 2px solid #e9ecef;">
-                                <p style="color: #5a6c7d; margin-bottom: 15px; font-weight: 500;">
+                            <div style="background: white; padding: 30px; border-radius: 12px; text-align: center; border: 2px dashed #dee2e6;">
+                                <p style="color: #5a6c7d; margin-bottom: 20px; font-weight: 600; font-size: 15px;">
                                     <i class="fas fa-download"></i> Export Laporan Rekap
                                 </p>
                                 <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                                    <button type="button" class="btn btn-success" onclick="exportRekap('excel')">
+                                    <button type="button" class="btn btn-success" onclick="exportRekap('excel')" style="min-width: 180px;">
                                         <i class="fas fa-file-excel"></i>
                                         Export ke Excel
                                     </button>
-                                    <button type="button" class="btn btn-danger" onclick="exportRekap('pdf')">
+                                    <button type="button" class="btn btn-danger" onclick="exportRekap('pdf')" style="min-width: 180px;">
                                         <i class="fas fa-file-pdf"></i>
                                         Export ke PDF
                                     </button>
@@ -921,7 +949,7 @@
     <div id="detailModal" class="modal" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modalTitle">Detail Pengaduan</h3>
+                <h3 id="modalTitle">Detail Permohonan</h3>
                 <button class="modal-close" onclick="closeModal('detailModal')">&times;</button>
             </div>
             <div class="modal-body" id="modalBody">
@@ -934,7 +962,7 @@
     <div id="statusModal" class="modal" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Update Status Pengaduan</h3>
+                <h3>Update Status Permohonan Dokumen</h3>
                 <button class="modal-close" onclick="closeModal('statusModal')">&times;</button>
             </div>
             <div class="modal-body">

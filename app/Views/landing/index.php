@@ -855,7 +855,7 @@
             <ul class="navbar-nav">
                 <li><a href="<?= base_url('/') ?>">Beranda</a></li>
                 <li><a href="<?= base_url('/dokumen-publik') ?>">Dokumen</a></li>
-                <li><a href="#pengaduan">Pengaduan</a></li>
+                <li><a href="#pengaduan">Permohonan Dokumen</a></li>
                 <li><a href="<?= base_url('user/dashboard') ?>">Dashboard User</a></li>
             </ul>
             <?php if (session()->get('logged_in')): ?>
@@ -882,7 +882,7 @@
             <div class="hero-buttons">
                 <a href="#pengaduan" class="btn-hero btn-primary-hero">
                     <i class="fas fa-paper-plane"></i>
-                    Ajukan Permintaan Dokumen
+                    Ajukan Permohonan Dokumen
                 </a>
                 <a href="<?= base_url('/dokumen-publik') ?>" class="btn-hero btn-secondary-hero">
                     <i class="fas fa-search"></i>
@@ -913,7 +913,7 @@
                     <div class="feature-icon">
                         <i class="fas fa-paper-plane"></i>
                     </div>
-                    <h3>Permintaan Dokumen</h3>
+                    <h3>Permohonan Dokumen</h3>
                     <p>Ajukan permintaan untuk dokumen yang belum tersedia dengan sistem tracking yang transparan dan notifikasi real-time</p>
                 </div>
                 
@@ -932,7 +932,7 @@
     <section id="pengaduan" class="pengaduan-section">
         <div class="container">
             <div class="section-title">
-                <h2>Ajukan Permintaan Dokumen</h2>
+                <h2>Ajukan Permohonan Dokumen</h2>
                 <p>Tidak menemukan dokumen yang Anda butuhkan? Ajukan permintaan dan tim kami akan membantu Anda dengan segera</p>
             </div>
             
@@ -1122,7 +1122,7 @@
         <div class="container">
             <div class="section-title">
                 <h2 style="color: white;">Cek Status Permintaan</h2>
-                <p style="color: rgba(255,255,255,0.9);">Masukkan nomor tiket untuk melihat status permintaan dokumen Anda</p>
+                <p style="color: rgba(255,255,255,0.9);">Masukkan nomor tiket untuk melihat status permohonan dokumen Anda</p>
             </div>
             
             <div class="status-form">
@@ -1140,7 +1140,7 @@
     <div id="statusModal" class="status-modal" style="display: none;">
         <div class="status-modal-content">
             <div class="status-modal-header">
-                <h3>Status Pengaduan</h3>
+                <h3>Status Permohonan Dokumen</h3>
                 <button class="status-modal-close" onclick="closeStatusModal()">&times;</button>
             </div>
             <div class="status-modal-body" id="statusModalBody">
@@ -1162,7 +1162,7 @@
                     <h3>Menu</h3>
                     <a href="<?= base_url('/') ?>">Beranda</a>
                     <a href="<?= base_url('/dokumen-publik') ?>">Dokumen Publik</a>
-                    <a href="#pengaduan">Pengaduan Dokumen</a>
+                    <a href="#pengaduan">Permohonan Dokumen</a>
                     <a href="<?= base_url('/about') ?>">Tentang Kami</a>
                 </div>
                 
@@ -1219,7 +1219,7 @@
             document.getElementById('statusModalBody').innerHTML = `
                 <div class="loading-message">
                     <div class="loading-spinner"></div>
-                    Mencari status pengaduan...
+                    Mencari status Permohonan Dokumen...
                 </div>
             `;
             

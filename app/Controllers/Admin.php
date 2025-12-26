@@ -468,17 +468,43 @@ class Admin extends BaseController
         exit;
     }
 
-// =============== KATEGORI MANAGEMENT ===============
+    // =============== KATEGORI MANAGEMENT ===============
     public function kategori()
     {
         $redirect = $this->redirectIfNotLoggedIn() ?: $this->redirectIfNotAdmin();
         if ($redirect) return $redirect;
 
+        $this->initializeDB(); // Pastikan DB initialized
+
+        // TAMBAH INI - Get search parameter
+        $search = $this->request->getGet('search');
+        
+        // UBAH QUERY INI
+        $builder = $this->db->table('kategori k')
+                            ->select('k.*, m.nama_menu, COUNT(d.id) as jumlah_dokumen')
+                            ->join('menu m', 'm.id = k.menu_id', 'left')
+                            ->join('dokumen d', 'd.kategori_id = k.id', 'left');
+        
+        if (!empty($search)) {
+            $builder->groupStart()
+                    ->like('k.nama_kategori', $search)
+                    ->orLike('k.deskripsi', $search)
+                    ->orLike('m.nama_menu', $search)
+                    ->groupEnd();
+        }
+        
+        $kategoriData = $builder->groupBy('k.id')
+                            ->orderBy('m.nama_menu', 'ASC')
+                            ->orderBy('k.nama_kategori', 'ASC')
+                            ->get()
+                            ->getResultArray();
+
         $data = [
             'title' => 'Kelola Kategori',
             'user' => $this->getUserData(),
-            'kategori' => $this->kategoriModel->getKategoriWithCount(),
-            'menu' => $this->menuModel->getActiveMenu() // Tambahkan menu aktif untuk dropdown
+            'kategori' => $kategoriData,
+            'menu' => $this->menuModel->getActiveMenu(),
+            'search' => $search  // TAMBAHKAN INI
         ];
 
         return view('admin/kategori', $data);
@@ -660,10 +686,33 @@ class Admin extends BaseController
         $redirect = $this->redirectIfNotLoggedIn() ?: $this->redirectIfNotAdmin();
         if ($redirect) return $redirect;
 
+        $this->initializeDB(); // TAMBAH INI - Pastikan DB initialized
+
+        // TAMBAH INI - Get search parameter
+        $search = $this->request->getGet('search');
+        
+        // UBAH QUERY INI - Pakai db->table bukan menuModel->builder
+        $builder = $this->db->table('menu m')
+                            ->select('m.*, COUNT(d.id) as jumlah_dokumen')
+                            ->join('dokumen d', 'd.menu_id = m.id', 'left');
+        
+        if (!empty($search)) {
+            $builder->groupStart()
+                    ->like('m.nama_menu', $search)
+                    ->orLike('m.deskripsi', $search)
+                    ->groupEnd();
+        }
+        
+        $menuData = $builder->groupBy('m.id')
+                            ->orderBy('m.nama_menu', 'ASC')
+                            ->get()
+                            ->getResultArray();
+
         $data = [
             'title' => 'Kelola Menu',
             'user' => $this->getUserData(),
-            'menu' => $this->menuModel->getMenuWithCount()
+            'menu' => $menuData,
+            'search' => $search  // TAMBAHKAN INI
         ];
 
         return view('admin/menu', $data);
@@ -780,12 +829,40 @@ class Admin extends BaseController
         $redirect = $this->redirectIfNotLoggedIn() ?: $this->redirectIfNotAdmin();
         if ($redirect) return $redirect;
 
+        $this->initializeDB(); // Pastikan DB initialized
+
+        // TAMBAH INI - Get search parameter
+        $search = $this->request->getGet('search');
+        
+        // UBAH QUERY INI
+        $builder = $this->db->table('dokumen d')
+                            ->select('d.*, k.nama_kategori, m.nama_menu, u.nama_lengkap as uploader')
+                            ->join('kategori k', 'k.id = d.kategori_id')
+                            ->join('menu m', 'm.id = d.menu_id')
+                            ->join('users u', 'u.id = d.uploaded_by');
+        
+        if (!empty($search)) {
+            $builder->groupStart()
+                    ->like('d.judul', $search)
+                    ->orLike('d.deskripsi', $search)
+                    ->orLike('d.file_name', $search)
+                    ->orLike('d.tags', $search)
+                    ->orLike('k.nama_kategori', $search)
+                    ->orLike('m.nama_menu', $search)
+                    ->groupEnd();
+        }
+        
+        $dokumenData = $builder->orderBy('d.created_at', 'DESC')
+                            ->get()
+                            ->getResultArray();
+
         $data = [
             'title' => 'Kelola Dokumen',
             'user' => $this->getUserData(),
-            'dokumen' => $this->dokumenModel->getAllDokumen(),
+            'dokumen' => $dokumenData,
             'kategori' => $this->kategoriModel->getActiveKategori(),
-            'menu' => $this->menuModel->getActiveMenu()
+            'menu' => $this->menuModel->getActiveMenu(),
+            'search' => $search  // TAMBAHKAN INI
         ];
 
         return view('admin/dokumen', $data);
@@ -1192,18 +1269,34 @@ class Admin extends BaseController
         return $this->response->download($filePath, null)->setFileName($dokumen['file_name']);
     }
 
-// =============== USER MANAGEMENT ===============
-// Tambahkan method ini ke dalam class Admin di Admin.php
-
+    // =============== USER MANAGEMENT ===============
+    // Tambahkan method ini ke dalam class Admin di Admin.php
     public function user()
     {
         $redirect = $this->redirectIfNotLoggedIn() ?: $this->redirectIfNotAdmin();
         if ($redirect) return $redirect;
 
+        // TAMBAHKAN INI - Get search parameter
+        $search = $this->request->getGet('search');
+        
+        // UBAH QUERY INI
+        if (!empty($search)) {
+            $users = $this->userModel
+                ->groupStart()
+                    ->like('nama_lengkap', $search)
+                    ->orLike('username', $search)
+                    ->orLike('nip', $search)
+                ->groupEnd()
+                ->findAll();
+        } else {
+            $users = $this->userModel->findAll();
+        }
+
         $data = [
             'title' => 'Kelola User',
             'user' => $this->getUserData(),
-            'users' => $this->userModel->findAll()
+            'users' => $users,
+            'search' => $search  // TAMBAHKAN INI untuk maintain search value
         ];
 
         return view('admin/user', $data);
@@ -1468,7 +1561,7 @@ class Admin extends BaseController
             $builder->groupStart()
                    ->like('nama', $keyword)
                    ->orLike('email', $keyword)
-                   ->orLike('nip', $keyword) // TAMBAH PENCARIAN NIP
+                   ->orLike('nip', $keyword)
                    ->orLike('ticket_number', $keyword)
                    ->orLike('judul_dokumen', $keyword)
                    ->groupEnd();

@@ -444,7 +444,7 @@ function createNotificationElements() {
     `;
     summaryButton.innerHTML = `
       <i class="fas fa-bell"></i>
-      <span id="notificationCount">0</span> Pengaduan Aktif
+      <span id="notificationCount">0</span> Permohonan Aktif
     `;
     document.body.appendChild(summaryButton);
   }
@@ -523,7 +523,7 @@ function renderFloatingNotifications(notifications) {
         isUrgent ? "urgent" : ""
       }" onclick="goToPengaduan(${notif.id})">
         <div class="notification-header">
-          <span class="notification-title">Pengaduan Baru - ${escapeHtml(
+          <span class="notification-title">Permohonan Baru - ${escapeHtml(
             notif.ticket_number || "N/A"
           )}</span>
           <button class="notification-close" onclick="event.stopPropagation(); dismissNotification(${

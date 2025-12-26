@@ -126,9 +126,9 @@
         .kategori-table th:nth-child(1) { width: 5%; }    /* No */
         .kategori-table th:nth-child(2) { width: 18%; }   /* Nama Kategori */
         .kategori-table th:nth-child(3) { width: 15%; }   /* Menu */
-        .kategori-table th:nth-child(4) { width: 30%; }   /* Deskripsi */
-        .kategori-table th:nth-child(5) { width: 12%; }   /* Jumlah Dokumen */
-        .kategori-table th:nth-child(6) { width: 10%; }   /* Waktu Upload */
+        .kategori-table th:nth-child(4) { width: 27%; }   /* Deskripsi */
+        .kategori-table th:nth-child(5) { width: 14%; }   /* Jumlah Dokumen */
+        .kategori-table th:nth-child(6) { width: 11%; }   /* Waktu Upload */
         .kategori-table th:nth-child(7) { width: 7%; }    /* Status */
         .kategori-table th:nth-child(8) { width: 13%; }   /* Aksi */
         
@@ -246,7 +246,7 @@
                     <li class="nav-item">
                         <a href="<?= base_url('admin/pengaduan') ?>" class="nav-link">
                             <i class="fas fa-headset"></i>
-                            <span>Kelola Pengaduan</span>
+                            <span>Kelola Permohonan Dokumen</span>
                         </a>
                     </li>
 
@@ -292,6 +292,35 @@
                         <?= session()->getFlashdata('error') ?>
                     </div>
                 <?php endif; ?>
+
+                <!-- Search Box -->
+                <div class="search-filter-container" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+                    <form method="GET" action="<?= base_url('admin/kategori') ?>" style="display: flex; gap: 12px; align-items: center;">
+                        <div style="flex: 1; position: relative;">
+                            <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #667eea; font-size: 16px;"></i>
+                            <input 
+                                type="text" 
+                                name="search" 
+                                class="form-control" 
+                                placeholder="Cari berdasarkan Nama Kategori, Menu, atau Deskripsi..." 
+                                value="<?= esc($search ?? '') ?>"
+                                style="padding-left: 45px; border-radius: 12px; border: 2px solid #e9ecef; font-size: 14px; transition: all 0.3s ease;"
+                                onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'"
+                                onblur="this.style.borderColor='#e9ecef'; this.style.boxShadow='none'"
+                            >
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="padding: 12px 24px; border-radius: 12px; display: flex; align-items: center; gap: 8px; white-space: nowrap;">
+                            <i class="fas fa-search"></i>
+                            <span>Cari</span>
+                        </button>
+                        <?php if (!empty($search)): ?>
+                            <a href="<?= base_url('admin/kategori') ?>" class="btn" style="background: #6c757d; color: white; padding: 12px 24px; border-radius: 12px; display: flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">
+                                <i class="fas fa-times"></i>
+                                <span>Reset</span>
+                            </a>
+                        <?php endif; ?>
+                    </form>
+                </div>
 
                 <!-- Table Container -->
                 <div class="table-container">
@@ -595,6 +624,33 @@
                 }
             });
         }
+
+        // Highlight search results untuk KATEGORI
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchParam = new URLSearchParams(window.location.search).get('search');
+            if (searchParam && searchParam.trim() !== '') {
+                const keyword = searchParam.trim().toLowerCase();
+                const tableRows = document.querySelectorAll('.kategori-table tbody tr');
+                
+                tableRows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    let found = false;
+                    
+                    cells.forEach(cell => {
+                        const text = cell.textContent.toLowerCase();
+                        if (text.includes(keyword)) {
+                            found = true;
+                        }
+                    });
+                    
+                    if (found) {
+                        row.style.background = 'rgba(102, 126, 234, 0.05)';
+                        row.style.borderLeft = '4px solid #667eea';
+                        row.style.transition = 'all 0.3s ease';
+                    }
+                });
+            }
+        });
     </script>
     <script src="<?= base_url('assets/js/admin.js') ?>"></script>
 </body>
